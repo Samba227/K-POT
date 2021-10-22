@@ -1,0 +1,316 @@
+<div class="container-fluid">
+
+  <!-- Page Heading -->
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Offline Connexions Management</h1>
+
+  </div>
+
+  <!-- Content Row -->
+  <div class="row">
+
+    <div class="col-xl-4 col-md-6 mb-4">
+      <div class="card border-left-primary shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                Number of connections&nbsp;
+                <i class="fas fa-exchange-alt fa-2x text-gray-300 float-right" role="button"
+                   data-toggle="modal" data-target="#exampleModalScrollable">
+                </i></div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">{{ connexions?.length }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card border-left-primary shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">
+                Total Frames&nbsp;<i class="fas fa-exchange-alt fa-2x text-gray-300 float-right"></i></div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">{{ frames?.length }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    </div>
+
+  <!-- Content Row -->
+
+  <div class="row" *ngIf="selectedConnexion">
+    <div class="col-md-12">
+      <div class="card shadow mb-4">
+        <div class="card-header d-sm-flex align-items-center justify-content-between mb-0"
+             *ngIf="selectedConnexion"
+        >
+          <h4 class="m-0 font-weight-bold p-text-capitalize">
+            Connexion selected :&nbsp;
+            <small class="text-success">
+            {{ selectedConnexion?.ipSource }} [ {{ selectedConnexion?.macSource }} ]
+            &nbsp;->&nbsp;
+            {{ selectedConnexion?.ipDest }} [ {{ selectedConnexion?.macDest }} ]
+            </small>
+          </h4>
+        </div>
+
+        <div class="card-header d-sm-flex align-items-center justify-content-between mb-0">
+          <h6 class="m-0 font-weight-bold text-primary p-text-capitalize">Frames List</h6>
+          <span class="p-input-icon-left">
+              <i class="pi pi-search"></i>
+              <input type="text" pInputText placeholder="Search" (keyup)="searchFilter($event)"
+              />
+          </span>
+
+        </div>
+        <div class="card-body">
+          <div class="table-responsive" style="overflow-y: auto; height: 300px">
+            <table class="table table-bordered table-hover" width="100%" cellspacing="0">
+              <thead class="bg-light p-text-center">
+              <tr>
+                <th
+                  class="frame-column"
+                  role="button"
+                  (click)="sortBy('time')"
+                >
+                  frame_time (s)
+                    <span *ngIf="sort[0] === 'time'">
+                      <i class="pi pi-sort-amount-up-alt" *ngIf="sort[1] === 'desc'">
+                      </i>
+                      <i class="pi pi-sort-amount-down-alt" *ngIf="sort[1] === 'asc'">
+                      </i>
+                    </span>
+
+                </th>
+
+                <th
+                  class="frame-column"
+                  role="button"
+                  (click)="sortBy('ip_source')"
+                >
+                  ip_source
+                  <span *ngIf="sort[0] === 'ip_source'">
+                      <i class="pi pi-sort-amount-up-alt" *ngIf="sort[1] === 'desc'">
+                      </i>
+                      <i class="pi pi-sort-amount-down-alt" *ngIf="sort[1] === 'asc'">
+                      </i>
+                    </span>
+                </th>
+
+                <th
+                  class="frame-column"
+                  role="button"
+                  (click)="sortBy('ip_dest')"
+                >
+                  ip_dest
+                  <span *ngIf="sort[0] === 'ip_dest'">
+                      <i class="pi pi-sort-amount-up-alt" *ngIf="sort[1] === 'desc'">
+                      </i>
+                      <i class="pi pi-sort-amount-down-alt" *ngIf="sort[1] === 'asc'">
+                      </i>
+                    </span>
+                </th>
+
+                <th
+                  class="frame-column"
+                  role="button"
+                  (click)="sortBy('protocol')"
+                >
+                  protocol
+                  <span *ngIf="sort[0] === 'protocol'">
+                      <i class="pi pi-sort-amount-up-alt" *ngIf="sort[1] === 'desc'">
+                      </i>
+                      <i class="pi pi-sort-amount-down-alt" *ngIf="sort[1] === 'asc'">
+                      </i>
+                    </span>
+
+                </th>
+
+                <th
+                  class="frame-column"
+                >
+                  flags
+                </th>
+              </tr>
+              </thead>
+              <tbody class="tres-petit">
+              <tr *ngFor="let frame of filteredFrames"
+                  (click)="onSelectFrame(frame)"
+                  [ngClass]="{'bg-info' : frame === selectedFrame}"
+              >
+                <!--<td class="frame-column">
+                  {{ frame?.frame_time |  date:'dd/MM/yyyy à hh:mm:ss a' }}
+                </td>-->
+                <td class="frame-column">{{ frame.frame_time }}</td>
+                <td class="frame-column">{{ frame.ip_src }}</td>
+                <td class="frame-column">{{ frame.ip_dst }}</td>
+                <td class="frame-column">{{ frame.protocol }}</td>
+                <td class="frame-column">{{ frame.flags }}</td>
+              </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card-footer">
+          <div class="container">
+            <div class="row" *ngIf="connexion_hmm!==undefined">
+            <!--    matrice de transitions    -->
+              <div class="col-sm-6">
+                <h2 class="text-center">Transition Matrix</h2>
+                <p-scrollPanel [style]="{height: '300px'}">
+
+                  <table class="table table-bordered table-striped">
+			  <thead>
+			  	<tr>
+			  		<th></th>
+			  		<th *ngFor="let i of range(connexion_hmm?.states.length)">({{connexion_hmm.states[i]}})</th>
+			  	</tr>
+			  </thead>
+			  <thead>
+			  	<tr *ngFor="let i of range(connexion_hmm?.states.length)">
+			  		<th>({{connexion_hmm.states[i]}})</th>
+			  		<td *ngFor="let j of range(connexion_hmm?.states.length)">{{connexion_hmm.transitionMatrix[i][j]}}</td>
+			  	</tr>
+			  </thead>
+                  </table>
+                  <p>
+
+                  </p>
+                  <p-scrollTop
+                    target="parent"
+                    styleClass="custom-scrolltop"
+                    [threshold]="100"
+                    icon="pi pi-arrow-up"
+                  ></p-scrollTop>
+                </p-scrollPanel>
+              </div>
+
+              <!--    fin matrice de transitions    -->
+
+              <!--    matrice d'emission    -->
+              <div class="col-sm-6">
+                <h2 class="text-center">Emission Matrix</h2>
+                <p-scrollPanel [style]="{height: '300px'}">
+
+                  <table class="table table-bordered table-striped">
+			  <thead>
+			  	<tr>
+			  		<th></th>
+			  		<th>Length</th>
+			  		<th>TIP (ms)</th>
+			  	</tr>
+			  </thead>
+			  <thead>
+			  	<tr *ngFor="let i of range(connexion_hmm?.states.length)">
+			  		<th>({{connexion_hmm.states[i]}})</th>
+			  		<td *ngFor="let j of range(2)">{{connexion_hmm.emissionMatrix[i][j]}}</td>
+			  	</tr>
+			  </thead>
+                  </table>
+                  <p>
+
+                  </p>
+                  <p-scrollTop
+                    target="parent"
+                    styleClass="custom-scrolltop"
+                    [threshold]="100"
+                    icon="pi pi-arrow-up"
+                  ></p-scrollTop>
+                </p-scrollPanel>
+              </div>
+              <!--    fin matrice d'emission    -->
+
+           <form [formGroup]="labelForm">
+				<div class="p-field p-col-12 p-md-12">
+					<label for="label">Connexion labeled as : <strong>{{connexion_hmm.label}}</strong></label>
+					<input type="text" class="form-control" id="label" placeholder="enter new label" formControlName="label"/><button
+		              class="btn btn-sm btn-warning"
+		              [disabled]="!labelForm.valid"
+		              (click)="updateConnexionLabel()"
+		            >
+		              <i class="fa fa-pencil-alt"></i>
+		              Update
+		            </button>
+
+					<span class="text-danger" *ngIf="labelForm.controls['label'].invalid && labelForm.controls['label'].touched">
+						label required
+					</span>
+				</div>
+    		</form>
+	    </div>
+            <div class="row">
+            	<div class="col-sm-6 bg-white">
+                <app-frame-detail
+                  *ngIf="selectedFrame"
+                  [frame]="selectedFrame"
+                >
+
+                </app-frame-detail>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    </div>
+
+
+<!-- /.container-fluid -->
+
+<!-- Connexions Modal -->
+<div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalScrollableTitle">Connexions list</h5>
+      </div>
+      <div class="modal-body">
+        <div class="table-responsive" style="overflow-y: auto; height: 400px">
+          <table class="table table-bordered table-hover" width="100%" cellspacing="0">
+            <thead class="bg-light p-text-center">
+            <tr>
+              <th class="frame-column">
+                Machine 1
+              </th>
+              <th></th>
+              <th class="frame-column">
+                Machine 2
+              </th>
+            </tr>
+            </thead>
+            <tbody class="tres-petit">
+            <tr *ngFor="let connexion of connexions"
+                (click)="getFrames(connexion)"
+                [ngClass]="{'bg-info' : connexion === selectedConnexion}"
+                role="button"
+            >
+              <td class="frame-column">
+                {{ connexion?.ipSource}} &nbsp;[{{ connexion?.macSource }}]
+              </td>
+              <td class="frame-column p-text-center">
+                <i class="fas fa-exchange-alt text-gray-300"></i>
+              </td>
+              <td class="frame-column">{{ connexion?.ipDest}} &nbsp;[{{ connexion?.macDest }}]</td>
+            </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

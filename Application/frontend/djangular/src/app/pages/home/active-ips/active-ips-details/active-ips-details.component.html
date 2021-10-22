@@ -1,0 +1,3 @@
+<p-chart type="line" [data]="data" [options]="options"></p-chart>
+<p class="card-text mt-4"><strong class="text-success"><i class="pi pi-ellipsis-h"></i></strong>&nbsp;Received : {{actualDetails[1][29]<1000 ? actualDetails[1][29]+' Ko/s' : (actualDetails[1][29]/1000).toFixed(2)+' Mo/s'}}</p>
+<p class="card-text"><strong class="text-warning"><i class="pi pi-minus"></i></strong>&nbsp;Sent : {{actualDetails[0][29]<1000 ? actualDetails[0][29]+' Ko/s' : (actualDetails[0][29]/1000).toFixed(2)+' Mo/s'}}</p>

@@ -1,0 +1,198 @@
+<div class="container-fluid">
+
+  <!-- Page Heading -->
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Users Management</h1>
+    <a
+      role="button"
+      class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm"
+      data-toggle="modal" data-target="#exampleModal"
+      data-backdrop="static" data-keyboard="false"
+      (click)="addClick()"
+    ><i
+      class="fas fa-plus fa-sm text-white-50"></i> Add User</a>
+  </div>
+
+
+  <!-- Content Row -->
+  <div class="row">
+
+    <!-- Earnings (Monthly) Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card border-left-primary shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">
+                Total Users&nbsp;<i class="fas fa-user-alt fa-2x text-gray-300 float-right"></i></div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">{{ users?.length }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Earnings (Monthly) Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card border-left-success shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                Active users&nbsp;<i class="fas fa-user-check fa-2x text-gray-300 float-right"></i></div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">{{activeUsers}}</div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Earnings (Monthly) Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card border-left-success shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                Not Active users&nbsp;<i class="fas fa-user-lock fa-2x text-gray-300 float-right"></i></div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">{{notActiveUsers}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Earnings (Monthly) Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card border-left-success shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                Admin Users&nbsp;<i class="fas fa-user-cog fa-2x text-gray-300 float-right"></i></div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">{{superUsers}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Content Row -->
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card shadow mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary p-text-uppercase">Users List</h6>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover" width="100%" cellspacing="0">
+              <thead class="bg-light p-text-center">
+              <tr>
+                <th>Type</th>
+                <th>Username</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Last Login</th>
+                <th>Option</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let user of users">
+                <td>
+                  <i class="fas fa-user-cog fa-sm text-success text-gray-300"
+                     *ngIf="user.is_superuser==true; else normal"
+                  ></i>
+                  <ng-template #normal>
+                    <i
+                      class="fas fa-user-check fa-sm text-primary text-gray-300"
+                      *ngIf="user.is_active==true"
+                    ></i>
+                    <i
+                      class="fas fa-user-lock fa-sm text-danger text-gray-300"
+                      *ngIf="user.is_active==false"
+                    ></i>
+                  </ng-template>
+
+                </td>
+
+                <td>{{ user.username }}</td>
+                <td>{{ user.first_name !== "" ? user.first_name : '---' }}</td>
+                <td>{{ user.last_name !== "" ? user.last_name : '---' }}</td>
+                <td>
+                  {{ user?.last_login |  date:'dd/MM/yyyy à hh:mm:ss a'}}
+                </td>
+
+                <td class="p-text-right p-ac-between">
+                  <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-sm p-button-warning p-mr-2"
+                          data-toggle="modal" data-target="#exampleModal"
+                          data-backdrop="static" data-keyboard="false"
+                          (click)="editClick(user)"
+                  ></button>
+                  <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-sm p-button-danger"
+                          data-toggle="modal" data-target="#deleteModal"
+                          data-backdrop="static" data-keyboard="false"
+                          (click)="userToDeleteId = user?.id"
+                          *ngIf="user?.id !== currentSessionUser?.id"
+                  ></button>
+                </td>
+              </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+  </div>
+
+</div>
+<!-- /.container-fluid -->
+
+<!-- AddEditModal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{ModalTitle}}</h5>
+        <button
+          type="button" class="close"
+          data-dismiss="modal" aria-label="Close"
+          (click)="closeClick()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <app-add-edit-user [user]="addEditUser" *ngIf="ActivateAddEditUser"></app-add-edit-user>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- User Delete Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteModalLabel">Are you sure ?</h5>
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">Select "Delete" below if you are sure to delete this user.</div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary btn-sm" type="button" data-dismiss="modal">Cancel</button>
+        <button class="btn btn-danger btn-sm" type="button" (click)="onDeleteUser()">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,60 @@
+<!-- Sidebar -->
+<ul class="navbar-nav text-danger" *ngIf="user?.is_superuser!==true; else superuser">
+  <li class="nav-item active">
+    <a class="nav-link" routerLink="/network">
+      <i class="fas fa-fw fa-tachometer-alt"></i>&nbsp;
+      <span>Dashboard</span></a>
+  </li>
+  <hr>
+  <li class="nav-item active">
+    <a class="nav-link text-success" routerLink="/activeIPs">
+      <i class="fas fa-fw fa-exchange-alt"></i>&nbsp;
+      <span>Active IPs</span></a>
+  </li>
+  <!--
+<hr>
+
+<li class="nav-item active">
+  <a class="nav-link" routerLink="/connexions-management">
+    <i class="fas fa-fw fa-exchange-alt"></i>&nbsp;
+    <span>Connexions</span></a>
+</li>
+<hr>
+<li class="nav-item active">
+  <a class="nav-link" routerLink="/blacklist">
+    <i class="fas fa-exclamation-circle fa-sm"></i>
+    &nbsp;
+    <span>Blacklist</span></a>
+</li>
+<hr>
+<li class="nav-item active ">
+  <a class="nav-link text-danger" routerLink="/honeypot-connections">
+    <i class="fas fa-fw fa-exchange-alt"></i>&nbsp;
+    <span>Honeypot</span></a>
+</li>
+-->
+</ul>
+
+<ng-template #superuser>
+  <ul class="navbar-nav text-danger">
+    <li class="nav-item active">
+      <a class="nav-link" routerLink="/admin/offline-connexions">
+      <i class="fas fa-fw fa-exchange-alt"></i>&nbsp;
+      <span>Connexions</span></a>
+    </li>
+    <hr>
+    <li class="nav-item active">
+      <a class="nav-link" routerLink="/admin/users">
+      <i class="fas fa-fw fa-users"></i>&nbsp;
+      <span>Users</span></a>
+    </li>
+    <hr>
+    <li class="nav-item active">
+      <a class="nav-link" routerLink="/admin/capture-settings">
+      <i class="fas fa-fw fa-cogs"></i>&nbsp;
+      <span>Capture</span></a>
+    </li>
+  </ul>
+</ng-template>
+
+

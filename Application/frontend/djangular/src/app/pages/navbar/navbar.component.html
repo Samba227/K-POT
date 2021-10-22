@@ -1,0 +1,54 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top shadow-sm">
+  <a class="navbar-brand" role="button" routerLink="/">
+    <img src="assets/logos/knet1.svg" alt="logo" class="img-fluid" style="height: 50px;"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end" id="navbarToggler">
+    <ul class="navbar-nav">
+      <li class="nav-item dropdown no-arrow" *ngIf="currentUser != null">
+        <a class="nav-link dropdown-toggle" id="userDropdown" role="button"
+           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+           <p-avatar
+            label="{{currentUser.username[0].toUpperCase()}}"
+            styleClass="p-mr-2" shape="circle"
+           ></p-avatar>
+            <span class="mr-2 d-none d-lg-inline text-gray-600">{{currentUser.username}}</span>
+
+        </a>
+        <!-- Dropdown - User Information -->
+        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+             aria-labelledby="userDropdown">
+          <a class="dropdown-item" routerLink="/profile">
+            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+            Profile
+          </a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item text-danger" href="#" data-toggle="modal" data-target="#logoutModal">
+            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+            Logout
+          </a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+        <button class="btn btn-danger" type="button" (click)="onSignOut()">Logout</button>
+      </div>
+    </div>
+  </div>
+</div>

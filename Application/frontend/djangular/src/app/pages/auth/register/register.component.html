@@ -1,0 +1,28 @@
+<form [formGroup]="registerForm" (ngSubmit)="onRegister()" class="bg-white">
+  <div class="card" style="width:350px">
+    <div class="card-header bg-warning">
+      <h4 class="card-title">Registration</h4>
+    </div>
+    <div class="card-body">
+      <div class="col-md-12">
+        <input type="text" class="form-control" placeholder="Username" formControlName="username">
+        <span class="text-danger" *ngIf="registerForm.controls['username'].invalid && registerForm.controls['username'].touched">
+          username required
+        </span>
+      </div>
+      <br>
+      <div class="col-md-12">
+        <input type="password" class="form-control" placeholder="Password" formControlName="password">
+        <span class="text-danger" *ngIf="registerForm.controls['password'].invalid && registerForm.controls['password'].touched">
+          password required
+        </span>
+      </div>
+      <br>
+      <div class="col-md-12">
+        <p>Already have an account ? click <a class="text-success" routerLink="/auth/login">here</a></p>
+        <button class="btn btn-sm btn-success" type="submit" [disabled]="!registerForm.valid">Register</button>
+      </div>
+    </div>
+  </div>
+
+</form>
