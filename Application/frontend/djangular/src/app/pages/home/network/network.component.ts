@@ -16,7 +16,8 @@ export class NetworkComponent implements OnInit {
   averageBandwidth: any;
   bandwidthDetails: any;
   basicData: any;
-  dataConsumptionDate: any = 'y';
+  filters: any[];
+  dataConsumptionDate: any;
   colors: any = [
     "rgba(2,91,250,0.78)",
     "rgba(25,135,243,0.88)",
@@ -34,6 +35,12 @@ export class NetworkComponent implements OnInit {
   constructor(private dashboardService: DashboardService) { }
 
   ngOnInit(): void {
+    this.dataConsumptionDate = {code: 'y'};
+    this.filters  = [
+      {name: 'This year', code: 'y'},
+      {name: 'This month', code: 'm'},
+      {name: 'Today', code: 'd'},
+    ];
     this.options3 = {
       responsive: true,
       legend: {
@@ -94,7 +101,7 @@ export class NetworkComponent implements OnInit {
       () => {
         this.dashboardService.getData().subscribe(
           (result: any) => {
-            if (result.success !== undefined){
+            if (result.success !== undefined && result.ips.length > 0){
               this.actualBandwidths.shift();
               this.actualBandwidths.push(Math.max.apply(null, result.details));
 
@@ -170,8 +177,9 @@ export class NetworkComponent implements OnInit {
     );
   }
 
-  private loadDataConsumption() {
-    this.dashboardService.getConsumptionByDate(this.dataConsumptionDate).subscribe(
+  loadDataConsumption() {
+    const date = this.dataConsumptionDate?.code !== undefined ? this.dataConsumptionDate.code : 'y';
+    this.dashboardService.getConsumptionByDate(date).subscribe(
       (result: any) => {
         if (result.ips !== undefined){
           const values = result.values;
@@ -197,14 +205,14 @@ export class NetworkComponent implements OnInit {
               {
                 data: values,
                 backgroundColor: [
-                  "rgba(248,74,111,0.82)",
-                  "rgba(226,62,100,0.8)",
-                  "rgba(238,133,155,0.81)",
-                  "rgba(234,171,184,0.84)",
-                  "#f6e2e6",
+                  'rgba(248,74,111,0.82)',
+                  'rgba(226,62,100,0.8)',
+                  'rgba(238,133,155,0.81)',
+                  'rgba(234,171,184,0.84)',
+                  '#f6e2e6',
                 ],
-                hoverBackgroundColor: "#ea0e3a",
-                hoverBorderColor: "#ea0e3a",
+                hoverBackgroundColor: '#ea0e3a',
+                hoverBorderColor: '#ea0e3a',
                 hoverBorderWidth: 4,
               }
             ]

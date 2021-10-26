@@ -46,6 +46,7 @@
       <div
         class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
         <h6 class="m-0 font-weight-bold text-primary">Data By IP ({{ default }})</h6>
+        <p-dropdown [options]="filters" [(ngModel)]="dataConsumptionDate" placeholder="Select a filter" optionLabel="name" (onChange)="loadDataConsumption()" [showClear]="true"></p-dropdown>
       </div>
       <!-- Card Body -->
       <div class="card-body">
