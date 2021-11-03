@@ -23,21 +23,6 @@
           </div>
         </div>
       </div>
-      <div class="card shadow mb-4">
-        <!-- Card Header - Dropdown -->
-        <div
-          class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-          <h6 class="m-0 font-weight-bold text-primary">Network Bandwidth Details (Ko/s)</h6>
-        </div>
-        <!-- Card Body -->
-        <div class="card-body">
-          <div class="chart-area">
-            <p-chart type="line" [data]="basicData" [options]="options1" height="15rem"></p-chart>
-          </div>
-        </div>
-      </div>
-
-
     </div>
 
     <!-- Pie Chart -->
@@ -51,26 +36,47 @@
       <!-- Card Body -->
       <div class="card-body">
         <div class="chart-pie pt-4 pb-2">
-          <p-chart type="doughnut" [data]="consumptionByIP" [options]="options2" height="15rem"></p-chart>
+          <p-chart type="bar" [data]="consumptionByIP" [options]="options2" height="15rem"></p-chart>
         </div>
       </div>
     </div>
-
+      <!--
       <div class="card shadow mb-4">
-        <!-- Card Header - Dropdown -->
         <div
           class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
           <h6 class="m-0 font-weight-bold text-primary">Bandwidth details by IP</h6>
         </div>
-        <!-- Card Body -->
         <div class="card-body">
           <div class="chart-pie pt-4 pb-2">
             <p-chart type="pie" [data]="bandwidthByIP" [options]="options3" height="12rem"></p-chart>
           </div>
         </div>
       </div>
+    -->
     </div>
   </div>
+
+  <div class="row">
+
+    <!-- Area Chart -->
+    <div class="col-xl-12 col-lg-12">
+      <div class="card shadow mb-4">
+        <!-- Card Header - Dropdown -->
+        <div
+          class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+          <h6 class="m-0 font-weight-bold text-primary">Network Bandwidth Details (Ko/s)</h6>
+        </div>
+        <!-- Card Body -->
+        <div class="card-body">
+          <div class="chart-area">
+            <p-chart type="line" [data]="basicData" [options]="options1" height="25rem"></p-chart>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+    </div>
 
 </div>
 <!-- /.container-fluid -->

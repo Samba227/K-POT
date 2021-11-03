@@ -18,17 +18,38 @@ export class NetworkComponent implements OnInit {
   basicData: any;
   filters: any[];
   dataConsumptionDate: any;
-  colors: any = [
-    "rgba(2,91,250,0.78)",
-    "rgba(25,135,243,0.88)",
-    "#44aff5",
-    "rgba(65,178,231,0.64)",
-    "rgba(27,213,213,0.89)",
-    "rgba(52,167,170,0.88)",
-    "#ADD8E6",
-    "#B0E0E6",
-    "#B0C4DE"
+  colors: any = /*[
+    'rgba(2,91,250,0.78)',
+    'rgba(27,213,213,0.89)',
+    '#44aff5',
+    '#8963b5',
+    '#93f99e',
+
   ];
+  */
+  ['#8963b5',
+'#a02be2',
+'#93f99e',
+'#42cffe',
+'#2cc867',
+'#aca8d1',
+'#e69f97',
+'#373348',
+'#857386',
+'#f0fc0b',
+'#72c54a',
+'#a346a8',
+'#af3503',
+'#a2406a',
+'#2d645c',
+'#2f8ca3',
+'#009907',
+'#b27b3a',
+'#732b3a',
+'#657904',
+'#d49558',
+'#a25fec',
+'#e9d34e'];
   options1: any;
   options2: any;
   options3: any;
@@ -59,6 +80,14 @@ export class NetworkComponent implements OnInit {
         //  position: 'left',
         labels: {
           usePointStyle: true,
+        },
+        scales: {
+          yAxes: [{
+            display: true,
+            ticks: {
+              beginAtZero: true
+            }
+          }]
         },
       }
     };
@@ -161,6 +190,7 @@ export class NetworkComponent implements OnInit {
                     data: actualDetails[i],
                     fill: true,
                     borderColor: this.colors[i],
+                    backgroundColor: this.colors[i],
                     tension: .4
                   }
                 );
@@ -203,14 +233,15 @@ export class NetworkComponent implements OnInit {
             labels: result.ips,
             datasets: [
               {
+                label: 'Data (' + this.default + ')',
                 data: values,
-                backgroundColor: [
+                backgroundColor: this.colors/*[
                   'rgba(248,74,111,0.82)',
                   'rgba(226,62,100,0.8)',
                   'rgba(238,133,155,0.81)',
                   'rgba(234,171,184,0.84)',
                   '#f6e2e6',
-                ],
+                ]*/,
                 hoverBackgroundColor: '#ea0e3a',
                 hoverBorderColor: '#ea0e3a',
                 hoverBorderWidth: 4,

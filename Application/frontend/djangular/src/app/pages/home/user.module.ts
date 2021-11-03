@@ -22,14 +22,12 @@ import {TableModule} from 'primeng/table';
 import { NetworkComponent } from './network/network.component';
 import { ActiveIpsComponent } from './active-ips/active-ips.component';
 import { ActiveIpsDetailsComponent } from './active-ips/active-ips-details/active-ips-details.component';
-/*
 import { ConnexionsManagementComponent } from './connexions-management/connexions-management.component';
 import { FrameDetailComponent } from './connexions-management/frame-detail/frame-detail.component';
 import { BlacklistComponent } from './blacklist/blacklist.component';
 import { HoneypotConnectionsComponent } from './honeypot-connections/honeypot-connections.component';
 import { ConnectionProfileComponent } from './honeypot-connections/connection-profile/connection-profile.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-*/
 
 @NgModule({
   declarations: [
@@ -39,13 +37,13 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     NavbarComponent,
     NetworkComponent,
     ActiveIpsComponent,
-    ActiveIpsDetailsComponent
-    //   ConnexionsManagementComponent,
-    //  FrameDetailComponent,
-    //  BlacklistComponent,
-    //  HoneypotConnectionsComponent,
-    //  ConnectionProfileComponent,
-    //  DashboardComponent,
+    ActiveIpsDetailsComponent,
+    ConnexionsManagementComponent,
+    FrameDetailComponent,
+    BlacklistComponent,
+    HoneypotConnectionsComponent,
+    ConnectionProfileComponent,
+    DashboardComponent,
   ],
   imports: [
     CommonModule,
