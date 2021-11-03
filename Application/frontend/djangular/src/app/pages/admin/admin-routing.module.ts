@@ -5,6 +5,7 @@ import {AdminComponent} from './admin.component';
 import {UsersComponent} from './users/users.component';
 import {OfflineConnexionsComponent} from './offline-connexions/offline-connexions.component';
 import {CaptureSettingsComponent} from './capture-settings/capture-settings.component';
+import {ComputersComponent} from './computers/computers.component';
 
 const routes: Routes = [
   {
@@ -29,6 +30,10 @@ const routes: Routes = [
       {
         path: 'capture-settings',
         component: CaptureSettingsComponent
+      },
+      {
+        path: 'computers',
+        component: ComputersComponent
       }
     ]
   }

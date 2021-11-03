@@ -9,11 +9,12 @@
   left: 0;
   top: 75px;
   padding-top: 30px;
+  z-index: 1 ;
 }
 
 #main{
   position: relative;
-  left: 150px;
+  left: 10rem;
   top: 100px;
 }
 

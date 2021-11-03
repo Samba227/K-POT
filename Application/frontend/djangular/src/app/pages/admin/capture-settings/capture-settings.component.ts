@@ -17,7 +17,7 @@ export class CaptureSettingsComponent implements OnInit {
           });
 
   constructor(
-    private connexionsService:ConnexionsService
+    private connexionsService: ConnexionsService
     ) { }
 
   ngOnInit(): void {
@@ -43,7 +43,7 @@ export class CaptureSettingsComponent implements OnInit {
   }
 
   updateSettings(){
-      
+
       this.config.interface_ip = this.settingsForm.get('interfaceIp').value;
       this.config.frames_number = this.settingsForm.get('framesNumber').value;
 

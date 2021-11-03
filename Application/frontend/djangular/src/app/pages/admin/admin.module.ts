@@ -15,6 +15,8 @@ import {InputSwitchModule} from 'primeng/inputswitch';
 import {AdminAuthGuard} from '../auth/auth-guard.service';
 import {ButtonModule} from 'primeng/button';
 import {RippleModule} from 'primeng/ripple';
+import { ComputersComponent } from './computers/computers.component';
+import {TableModule} from 'primeng/table';
 
 
 
@@ -25,7 +27,8 @@ import {RippleModule} from 'primeng/ripple';
     AddEditUserComponent,
     OfflineConnexionsComponent,
     FrameDetailComponent,
-    CaptureSettingsComponent
+    CaptureSettingsComponent,
+    ComputersComponent
   ],
   imports: [
     CommonModule,
@@ -36,7 +39,8 @@ import {RippleModule} from 'primeng/ripple';
     CheckboxModule,
     InputSwitchModule,
     ButtonModule,
-    RippleModule
+    RippleModule,
+    TableModule
   ],
   providers: [AdminAuthGuard],
 

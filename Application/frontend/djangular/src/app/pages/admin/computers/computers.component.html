@@ -1,0 +1,72 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xl-5 col-lg-5">
+      <form [formGroup]="computerForm" (ngSubmit)="newEntry? addComputer() : editComputer()" class="bg-white">
+        <div class="card shadow-sm" style="width:350px">
+          <div class="card-header">
+            <h4 class="card-title text-primary">{{newEntry ? 'Add new computer': 'Edit computer'}}</h4>
+          </div>
+          <div class="card-body">
+            <div class="col-md-12">
+              <input type="text" class="form-control" placeholder="IP Address" formControlName="ip">
+              <span class="text-danger" *ngIf="computerForm?.controls['ip'].invalid && computerForm.controls['ip'].touched">
+          IP address is required
+        </span>
+            </div>
+            <br>
+            <div class="col-md-12">
+              <input type="text" class="form-control" placeholder="Computer Name" formControlName="name">
+              <span class="text-danger" *ngIf="computerForm?.controls['name'].invalid && computerForm.controls['name'].touched">
+          name is required
+        </span>
+            </div>
+            <br>
+            <div class="col-md-12 text-center">
+              <button class="btn btn-sm btn-success" type="submit" [disabled]="!computerForm.valid" *ngIf="newEntry">
+                <i class="fa fa-plus"></i>&nbsp;
+                Add</button>
+              <button class="btn btn-sm btn-warning" type="submit" [disabled]="!computerForm.valid" *ngIf="!newEntry">
+                <i class="fa fa-pencil-alt"></i>&nbsp;
+                Edit</button>
+            </div>
+          </div>
+        </div>
+
+      </form>
+    </div>
+    <div class="col-xl-7 col-lg-7">
+      <div class="card mb-4">
+        <!-- Card Header - Dropdown -->
+        <div
+          class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+          <h4 class="m-0 text-primary">Computers list</h4>
+        </div>
+        <!-- Card Body -->
+        <div class="card-body">
+          <div class="chart-area">
+            <p-table [value]="computers" [scrollable]="true" scrollHeight="400px">
+              <ng-template pTemplate="header">
+                <tr>
+                  <th style="min-width:200px">IP Address</th>
+                  <th style="min-width:200px">Computer Name</th>
+                  <th class="text-right"  style="min-width:200px">Options</th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-computer>
+                <tr role="button">
+                  <td style="min-width:200px">{{computer.ip}}</td>
+                  <td style="min-width:200px">{{computer.name}}</td>
+                  <td class="text-right" style="min-width:200px">
+                    <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-sm p-button-warning p-mr-2"
+                            (click)="editClick(computer)"
+                    ></button>
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
