@@ -10,6 +10,7 @@ urlpatterns = [
     path('api/connexions/', include('connexions.api.urls')),
     path('', include('honeypot.urls')),
     path('api/dashboard/', include('dashboard.urls')),
+    path('api/report/', include('report.urls')),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
