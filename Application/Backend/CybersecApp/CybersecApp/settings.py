@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'users',
     'connexions',
     'honeypot',
-    'dashboard'
+    'dashboard',
+    'report'
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True    # added by me
