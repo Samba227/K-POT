@@ -59,7 +59,7 @@ export class ConnexionsService {
     return this.http.put<any[]>(this.ApiUrl + '/frames_capture_conf/', val);
   }
 
-  //========= BLACKLIST ADDRESSES =================
+  // ========= BLACKLIST ADDRESSES =================
 
   // ************  liste des adresses suspects *******************
   getBlackistAddresses(): Observable<any[]>{
@@ -73,7 +73,7 @@ export class ConnexionsService {
   }
 
 
-  //========= HONEYPOT CONNECTIONS =================
+  // ========= HONEYPOT CONNECTIONS =================
   getHoneypotConnections(): Observable<any[]>{
     return this.http.get<any[]>(this.ApiUrl2);
   }
@@ -82,4 +82,15 @@ export class ConnexionsService {
     return this.http.post<any[]>(this.ApiUrl2, val);
   }
 
+  // ========= Local Machines =================
+
+  // ************  list des machines locales *******************
+  getMachines(): Observable<any[]>{
+    return this.http.get<any[]>(this.ApiUrl + '/localMachines/');
+  }
+
+  // ************  mise à jour d'une machine *******************
+  updateMachine(val: any){
+    return this.http.put<any[]>(this.ApiUrl + '/localMachines/', val);
+  }
 }

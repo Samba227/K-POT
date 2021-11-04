@@ -17,6 +17,9 @@ import {ButtonModule} from 'primeng/button';
 import {RippleModule} from 'primeng/ripple';
 import { ComputersComponent } from './computers/computers.component';
 import {TableModule} from 'primeng/table';
+import {ToastModule} from 'primeng/toast';
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
 
 
 
@@ -40,7 +43,10 @@ import {TableModule} from 'primeng/table';
     InputSwitchModule,
     ButtonModule,
     RippleModule,
-    TableModule
+    TableModule,
+    ToastModule,
+    MessageModule,
+    MessagesModule
   ],
   providers: [AdminAuthGuard],
 
