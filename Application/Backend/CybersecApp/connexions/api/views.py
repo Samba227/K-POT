@@ -1,7 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .serializers import FrameSerializer, HMMLabelSerializer, FrameCaptureConfSerializer,SuspiciousIpSerializer
-from ..models import Frame, HMMLearning, HMMOnline, FrameCaptureConf, SuspiciousIp
+from .serializers import FrameSerializer, HMMLabelSerializer, FrameCaptureConfSerializer,SuspiciousIpSerializer, LocalMachineSerializer
+from ..models import Frame, HMMLearning, HMMOnline, FrameCaptureConf, SuspiciousIp, LocalMachine
 from ..tools.HMMConversion import HMMConversion
 from ..tools.HMMCheck import search_hmm_label
 
@@ -191,7 +191,6 @@ class FrameCaptureConfView(APIView):
 
 
     def put(self, request):
-        print(request.data)
         id = request.data.get('id')
         interfaceIp = request.data.get('interface_ip')
         framesNumber = request.data.get('frames_number')
@@ -259,3 +258,43 @@ class SuspiciousIpView(APIView):
             context['error'] = 'fieldsError'
 
         return Response(context)
+
+
+class LocalMachineView(APIView):
+    def get(self, request):
+        context = {}
+
+        # send existing config or an empty data
+
+        machines = LocalMachine.objects.all()
+        serializer = LocalMachineSerializer(machines, many=True)
+            
+        context['machines'] = serializer.data
+        return Response(context)
+
+
+    def put(self, request):
+        id = request.data.get('id')
+        ip = request.data.get('ip')
+        name = request.data.get('name')
+        context = {}
+
+        if id is not None and ip is not None and name is not None:
+
+            try:
+                machine = LocalMachine.objects.get(pk=id)
+                serializer = LocalMachineSerializer(machine, data=request.data)
+
+                if serializer.is_valid():
+                    serializer.save()
+                    context['success'] = True
+                else:
+                    context['failure'] = True
+
+            except LocalMachine.DoesNotExist:
+                context['failure'] = True
+
+        else:
+            context['failure'] = True
+        return Response(context)
+

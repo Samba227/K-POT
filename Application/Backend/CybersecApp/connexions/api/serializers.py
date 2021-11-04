@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from connexions.models import Frame, HMMLearning, FrameCaptureConf, SuspiciousIp
+from connexions.models import Frame, HMMLearning, FrameCaptureConf, SuspiciousIp, LocalMachine
 
 class FrameSerializer(serializers.ModelSerializer):
     class Meta:
@@ -27,4 +27,10 @@ class FrameCaptureConfSerializer(serializers.ModelSerializer):
 class SuspiciousIpSerializer(serializers.ModelSerializer):
     class Meta:
         model = SuspiciousIp
+        fields = '__all__'
+
+
+class LocalMachineSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = LocalMachine
         fields = '__all__'

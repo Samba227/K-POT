@@ -66,3 +66,19 @@ class SuspiciousIp(models.Model):
 
     def __str__(self):
         return '{}'.format(self.address)
+
+#  classes pour la resolution @IP => Name
+
+class LocalMachine(models.Model):
+    ip = models.CharField(max_length=100, blank=True, null=True)
+    name = models.CharField(max_length=100, blank=True, null=True)
+
+    def __str__(self):
+        return '{} [{}]'.format(self.ip, self.name)
+
+class Destinations(models.Model):
+    ip = models.CharField(max_length=100, blank=True, null=True)
+    name = models.CharField(max_length=100, blank=True, null=True)
+
+    def __str__(self):
+        return '{} [{}]'.format(self.ip, self.name)
