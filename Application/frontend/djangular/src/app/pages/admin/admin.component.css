@@ -14,7 +14,7 @@
 
 #main{
   position: relative;
-  left: 10rem;
+  left: 8rem;
   top: 100px;
 }
 
@@ -27,3 +27,4 @@
     left: 100px;
   }
 }
+
