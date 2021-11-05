@@ -39,8 +39,7 @@ export class ActiveIpsComponent implements OnInit {
   }
 
   closeClick(){
-    this.selectedIP = undefined;
-    this.showDetails = false;
+    location.reload();
   }
 
 }

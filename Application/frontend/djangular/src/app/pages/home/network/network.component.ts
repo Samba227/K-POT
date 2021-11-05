@@ -56,6 +56,7 @@ export class NetworkComponent implements OnInit {
   constructor(private dashboardService: DashboardService) { }
 
   ngOnInit(): void {
+
     this.dataConsumptionDate = {code: 'y'};
     this.filters  = [
       {name: 'This year', code: 'y'},

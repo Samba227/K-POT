@@ -13,6 +13,7 @@
             <p-table [value]="activeIPs" [scrollable]="true" scrollHeight="400px">
               <ng-template pTemplate="header">
                 <tr>
+                  <th style="min-width:200px">Name</th>
                   <th style="min-width:200px">IP Address</th>
                   <th style="min-width:200px">MAC Address</th>
                 </tr>
@@ -20,9 +21,10 @@
               <ng-template pTemplate="body" let-active>
                 <tr
                   role="button"
-                  (click)="onSelectFrame(active.ip_src)"
-                  [ngClass]="{'bg-info' : active.ip_src === selectedIP}"
+                  (click)="onSelectFrame(active)"
+                  [ngClass]="{'bg-info' : active === selectedIP}"
                 >
+                  <td style="min-width:200px">{{active.name}}</td>
                   <td style="min-width:200px">{{active.ip_src}}</td>
                   <td style="min-width:200px">{{active.mac_src}}</td>
                 </tr>
@@ -34,10 +36,10 @@
     </div>
   </div>
 
-  <p-dialog [(visible)]="showDetails" header="{{selectedIP}}" *ngIf="selectedIP" [style]="{width: '50vw'}" (onHide)="closeClick()">
+  <p-dialog [(visible)]="showDetails" header="{{selectedIP.name}} [{{selectedIP.ip_src}}]" *ngIf="selectedIP" [style]="{width: '50vw'}" (onHide)="closeClick()">
     <div class="card">
       <div class="card-body">
-        <app-active-ips-details [ip]="selectedIP" [actualDetails]="actualDetails"></app-active-ips-details>
+        <app-active-ips-details [ip]="selectedIP.ip_src" [actualDetails]="actualDetails"></app-active-ips-details>
       </div>
     </div>
   </p-dialog>
