@@ -1,4 +1,4 @@
-from connexions.models import Frame
+from connexions.models import Frame, LocalMachine
 from datetime import datetime, timedelta
 
 
@@ -71,5 +71,10 @@ def getAllIPConsumption(date=None):
             date = d.strftime('%Y')
     
     result = getTotalConsumption(ips, date)
+    # rename ips
+    for i in range(len(ips)):
+        machine = LocalMachine.objects.filter(ip=ips[i]).first()
+        if machine is not None and machine.name:
+            ips[i] = machine.name
 
     return {'ips': ips, 'values': result}

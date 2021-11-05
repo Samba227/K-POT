@@ -2,7 +2,7 @@
 from rest_framework.response import Response
 from rest_framework.views import APIView
 #from honeypot.models import HomeProfile, HomeLoginattempt
-from connexions.models import Frame
+from connexions.models import Frame, LocalMachine, Destinations
 from datetime import datetime, timedelta
 from .tools.networkData import getIPConsumptionByDate, getAllIPConsumption
 from .tools.bandwidth import getTotalBandwidth
@@ -80,7 +80,14 @@ class Bandwidth(APIView):
         # get only intern machines bandwith consumption
         ips1 = Frame.objects.filter(ip_src__startswith='192.168.2.', is_online=True).order_by('ip_src').distinct('ip_src').values('ip_src')
         ips = [i['ip_src'] for i in ips1]
-        return Response({'success': True, 'ips': ips, 'details': getTotalBandwidth(ips, start)})
+        details = getTotalBandwidth(ips, start)
+
+        # rename IPs
+        for i in range(len(ips)):
+            machine = LocalMachine.objects.filter(ip=ips[i]).first()
+            if machine is not None and machine.name:
+                ips[i] = machine.name
+        return Response({'success': True, 'ips': ips, 'details': details})
 
 
 class AllNetworkConsupmtion(APIView):
@@ -103,7 +110,45 @@ class ActiveIps(APIView):
             # get only intern machines bandwith consumption
             ips1 = Frame.objects.filter(ip_src__startswith='192.168.2.',frame_time__startswith=start, is_online=True).order_by('ip_src').distinct('ip_src').values('ip_src', 'mac_src')
             ips2 = Frame.objects.filter(ip_dst__startswith='192.168.2.',frame_time__startswith=start, is_online=True).order_by('ip_dst').distinct('ip_dst').values('ip_dst', 'mac_dst')
-            context['active'] = ips1.union(ips2)
+            #context['active'] = ips1.union(ips2)
+            ips = ips1.union(ips2)
+            for ip in ips:
+                machine = LocalMachine.objects.filter(ip=ip['ip_src']).first()
+                if machine is not None and machine.name:
+                    ip['name'] = machine.name
+                else:
+                    ip['name'] = ''
+            
+            context['active'] = ips
+
         else:
             context = getIPConsumptionByDate(ip, date)
         return Response(context)
+
+class TodayConnections(APIView):
+    def get(self, request):
+        d = datetime.now()
+        start = d.strftime('%Y-%m-%d')
+        #start = '2021-10-29'
+
+        connections = Frame.objects.filter(ip_src__startswith='192.168.2.',frame_time__startswith=start, is_online=True).distinct('ip_src', 'ip_dst').values('ip_src', 'ip_dst')
+        # IP Sources
+        ips = [i['ip_src'] for i in connections if i is not None]
+
+        # 
+        # connections per IP src
+        conx = {}
+        for ip in ips:
+            conx[ip] = {
+                'first connexion': Frame.objects.filter(ip_src=ip,frame_time__startswith=start, is_online=True).first().frame_time,
+                'last connexion': Frame.objects.filter(ip_src=ip,frame_time__startswith=start, is_online=True).last().frame_time,
+                'connections': [i['ip_dst'] for i in connections if i['ip_src'] == ip],
+                }
+
+        '''
+        # connexions par machine
+        connexions = {}
+        for src in sources:
+            connexions[src] = [item['ip_dst'] for item in report_frames.filter(ip_src=src).order_by('ip_dst').distinct('ip_dst').values('ip_dst')]
+        '''
+        return Response(conx)
