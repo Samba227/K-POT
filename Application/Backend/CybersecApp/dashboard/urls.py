@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import Bandwidth, AllNetworkConsupmtion, IPNetworkConsupmtion, ActiveIps #, Index
+from .views import Bandwidth, AllNetworkConsupmtion, IPNetworkConsupmtion, ActiveIps, TodayConnections #, Index
 
 urlpatterns = [
     #path('', Index.as_view()),
@@ -12,4 +12,5 @@ urlpatterns = [
     path('activeIPs/', ActiveIps.as_view()),
     path('activeIPs/<str:ip>/', ActiveIps.as_view()),
     path('activeIPs/<str:ip>/d=<str:date>/', ActiveIps.as_view()),
+    path('todayConnections/', TodayConnections.as_view()),
 ]

@@ -129,7 +129,6 @@ class TodayConnections(APIView):
     def get(self, request):
         d = datetime.now()
         start = d.strftime('%Y-%m-%d')
-        #start = '2021-10-29'
 
         connections = Frame.objects.filter(ip_src__startswith='192.168.2.',frame_time__startswith=start, is_online=True).distinct('ip_src', 'ip_dst').values('ip_src', 'ip_dst')
         # IP Sources
