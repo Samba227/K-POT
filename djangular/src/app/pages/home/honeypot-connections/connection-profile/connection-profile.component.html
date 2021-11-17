@@ -1,0 +1,108 @@
+<div class="row">
+
+  <p-panel class="col-sm-12">
+    <ng-template pTemplate="header" >
+      <h4>Connection Profile of : <strong class="text-success">{{profile?.ip}}</strong></h4>
+    </ng-template>
+    <div class="row">
+      <div class="col-sm-12 p-mb-4 p-pb-2 p-pt-2 bg-light">
+        <h5><strong>Geolocation informations</strong></h5>
+      </div>
+      <div class="col-sm-6 p-mb-4">
+        <h6><strong>IP Address</strong></h6>
+        {{profile?.ip}}
+      </div>
+      <div class="col-sm-6 p-mb-4">
+        <h6><strong>City</strong></h6>
+        {{profile?.city}}
+      </div>
+      <div class="col-sm-6 p-mb-4">
+        <h6><strong>Country</strong></h6>
+        {{profile?.country_name}}
+      </div>
+      <div class="col-sm-6 p-mb-4">
+        <h6><strong>Region</strong></h6>
+        {{profile?.region}}
+      </div>
+      <div class="col-sm-6">
+        <h6><strong>Location</strong></h6>
+        {{profile?.location}}
+      </div>
+      <div class="col-sm-6">
+        <h6><strong>Timezone</strong></h6>
+        {{profile?.time_zone_name}}
+      </div>
+    </div>
+
+      <div class="row p-mt-6">
+      <div class="col-sm-12 p-mb-4 p-pb-2 p-pt-2 bg-light">
+        <h5><strong>Navigator</strong></h5>
+      </div>
+      <div class="col-sm-6 p-mb-4">
+        <h6><strong>Operating System</strong></h6>
+        {{profile?.os}}
+      </div>
+      <div class="col-sm-6 p-mb-4">
+        <h6><strong>Browser</strong></h6>
+        {{profile?.browser}}
+      </div>
+      <div class="col-sm-6 p-mb-4">
+        <h6><strong>Screen size</strong></h6>
+        {{profile?.screen_size}}
+      </div>
+      <div class="col-sm-12 p-mb-4">
+        <h6><strong>User Agent</strong></h6>
+        {{profile?.user_agent}}
+      </div>
+    </div>
+
+    <div class="row p-mt-6">
+      <div class="col-sm-12 bg-light p-mb-4 p-pb-2 p-pt-2">
+        <h5><strong>Profile actions </strong></h5>
+      </div>
+
+      <div class="col-sm-6" *ngFor="let action of actions">
+        <h6 class="mb-2"><strong>{{action.name}}</strong></h6>
+        {{action?.value}} seconds
+      </div>
+    </div>
+
+    <div class="row p-mt-6">
+      <div class="col-sm-12 bg-light p-mb-4 p-pb-2 p-pt-2">
+        <h5><strong>Login Attempts </strong></h5>
+      </div>
+
+      <div class="col-sm-12">
+        <table class="table table-bordered table-hover" width="100%" cellspacing="0">
+            <thead class="bg-light p-text-center">
+            <tr>
+              <th class="frame-column">
+                Attempt Time
+              </th>
+              <th>Username</th>
+              <th class="frame-column">
+                Password
+              </th>
+            </tr>
+            </thead>
+            <tbody class="tres-petit">
+            <tr *ngFor="let attempt of loginAttempts">
+              <td class="frame-column">
+                {{ attempt.attempt_time}} 
+              </td>
+              <td class="frame-column">
+                {{ attempt.username}} 
+              </td>
+              <td class="frame-column">
+                {{ attempt.password}} 
+              </td>
+            </tr>
+
+            </tbody>
+          </table>
+      </div>
+    </div>
+
+  </p-panel>
+</div>
+

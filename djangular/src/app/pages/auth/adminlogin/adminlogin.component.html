@@ -1,0 +1,34 @@
+<app-header></app-header>
+<div class="container-fluid bg-light">
+  <div class="row d-flex justify-content-center text-center">
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="bg-white">
+      <div class="card" style="width:350px">
+        <div class="card-header bg-info">
+          <h4 class="card-title"><i class="fas fa-user-cog"></i>Admin Login</h4>
+        </div>
+        <div class="card-body">
+          <div class="col-md-12">
+            <input type="text" class="form-control" placeholder="Username" formControlName="username">
+            <span class="text-danger" *ngIf="loginForm.controls['username'].invalid && loginForm.controls['username'].touched">
+          username required
+        </span>
+          </div>
+          <br>
+          <div class="col-md-12">
+            <input type="password" class="form-control" placeholder="Password" formControlName="password">
+            <span class="text-danger" *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched">
+          password required
+        </span>
+          </div>
+          <br>
+          <div class="col-md-12">
+            <button class="btn btn-sm btn-success" type="submit" [disabled]="!loginForm.valid">login</button>
+          </div>
+        </div>
+      </div>
+      <p-toast></p-toast>
+    </form>
+
+
+  </div>
+</div>

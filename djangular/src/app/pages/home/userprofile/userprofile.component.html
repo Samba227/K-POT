@@ -1,0 +1,58 @@
+<form [formGroup]="accountForm" (ngSubmit)="onUpdate()">
+  <div class="row">
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-8">
+      <div class="row">
+        <h5>Profile</h5>
+        <div class="p-fluid p-grid p-formgrid">
+          <div class="p-field p-col-12 p-md-6">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" placeholder="Username" formControlName="username">
+            <span class="text-danger" *ngIf="accountForm.controls['username'].invalid && accountForm.controls['username'].touched">
+          username required
+        </span>
+          </div>
+
+          <div class="p-field p-col-12 p-md-6">
+            <label for="firstname">First Name</label>
+            <input type="text" class="form-control" id="firstname" placeholder="First Name" formControlName="first_name">
+          </div>
+
+          <div class="p-field p-col-12 p-md-6">
+            <label for="lastname">Last Name</label>
+            <input type="text" class="form-control" id="lastname" placeholder="Last Name" formControlName="last_name">
+          </div>
+
+          <div class="p-field p-col-12 p-md-6">
+            <label for="email">Email</label>
+            <input type="text" class="form-control" id="email" placeholder="Email" formControlName="email">
+          </div>
+
+          <div class="p-field p-col-12 p-md-6">
+            <label for="last_login">Last login</label>
+            <input type="text" class="form-control" id="last_login" formControlName="last_login">
+          </div>
+
+          <div class="p-field p-col-12 p-md-12 p-text-center">
+            <button
+              class="btn btn-sm btn-warning"
+              type="submit"
+              [disabled]="!accountForm.valid"
+            >
+              <i class="bi bi-pencil-square"></i>
+              update profile
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-md-2">
+    </div>
+
+
+  </div>
+</form>

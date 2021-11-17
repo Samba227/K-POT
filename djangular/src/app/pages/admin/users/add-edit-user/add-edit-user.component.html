@@ -1,0 +1,79 @@
+<form [formGroup]="userForm">
+  <div class="row">
+    <div class="col-md-12 p-p-6">
+      <div class="row">
+        <div class="p-fluid p-grid p-formgrid">
+          <div class="p-field p-col-12 p-md-6">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="username" placeholder="Username" formControlName="username">
+            <span class="text-danger" *ngIf="userForm.controls['username'].invalid && userForm.controls['username'].touched">
+              username required
+            </span>
+          </div>
+
+          <div class="p-field p-col-12 p-md-6">
+            <label for="firstname">First Name</label>
+            <input type="text" class="form-control" id="firstname" placeholder="First Name" formControlName="first_name">
+          </div>
+
+          <div class="p-field p-col-12 p-md-6">
+            <label for="lastname">Last Name</label>
+            <input type="text" class="form-control" id="lastname" placeholder="Last Name" formControlName="last_name">
+          </div>
+
+          <div class="p-field p-col-12 p-md-6">
+            <label for="email">Email</label>
+            <input type="text" class="form-control" id="email" placeholder="Email" formControlName="email">
+          </div>
+
+          <div class="p-field p-col-12 p-sm-12">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="Password" formControlName="password">
+            <span class="text-danger" *ngIf="userForm.controls['password'].invalid && userForm.controls['password'].touched">
+              password required
+            </span>
+          </div>
+          <hr>
+          <div class="p-field p-col-12 p-sm-6">
+            <label for="superuser">SuperUser</label><br>
+            <!--<p-checkbox id="superuser" formControlName="is_superuser" binary="true"></p-checkbox>-->
+            <p-inputSwitch id="superuser" formControlName="is_superuser"></p-inputSwitch>
+
+          </div>
+
+          <div class="p-field p-col-12 p-sm-6">
+            <label for="active">Active</label><br>
+            <!--<p-checkbox id="active" formControlName="is_active" binary="true"></p-checkbox>-->
+            <p-inputSwitch id="active" formControlName="is_active"></p-inputSwitch>
+
+          </div>
+
+
+          <div class="p-field p-col-12 p-md-12 p-text-center">
+            <button
+              class="btn btn-sm btn-warning"
+              [disabled]="!userForm.valid"
+              (click)="onUpdate()"
+              *ngIf="user.id !== 0"
+            >
+              <i class="fa fa-pencil-alt"></i>
+              Update
+            </button>
+
+            <button
+              class="btn btn-sm btn-success"
+              [disabled]="!userForm.valid"
+              (click)="onAdd()"
+              *ngIf="user.id === 0"
+            >
+              <i class="fa fa-plus"></i>
+              Add user
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</form>
