@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import {Frame} from '../models/frame.model';
 import {Packet} from '../models/Packet.model';
 
 @Injectable({

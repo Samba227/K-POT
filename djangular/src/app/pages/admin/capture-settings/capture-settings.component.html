@@ -1,10 +1,16 @@
-<form [formGroup]="settingsForm" (ngSubmit)="updateSettings()" class="bg-white">
-  <div class="card" style="width:350px">
+<div class="row mb-4">
+  <div class="col-xl-12 col-md-12">
+    <h1 class="h3 text-muted"><i class="fas fa-cog"></i>&nbsp;&nbsp;Configurations</h1>
+  </div>
+</div>
+<form [formGroup]="settingsForm" (ngSubmit)="updateSettings()">
+  <div class="card shadow-sm" style="width:350px">
     <div class="card-header bg-info">
-        <h4 class="card-title">Frames Capture Settings</h4>
+        <h4 class="card-title text-white">Frames Capture Settings</h4>
     </div>
     <div class="card-body">
       <div class="col-md-12">
+        <h5 class="text-muted">Interface</h5>
         <input type="text" class="form-control" placeholder="Capture Iface IP" formControlName="interfaceIp">
         <span class="text-danger" *ngIf="settingsForm?.controls['interfaceIp'].invalid && settingsForm.controls['interfaceIp'].touched">
           interface Ip is required
@@ -12,13 +18,14 @@
       </div>
       <br>
       <div class="col-md-12">
+        <h5 class="text-muted">HMM Number</h5>
         <input type="number" class="form-control" formControlName="framesNumber">
         <span class="text-danger" *ngIf="settingsForm?.controls['framesNumber'].invalid && settingsForm.controls['framesNumber'].touched">
           number required
         </span>
       </div>
       <br>
-      <div class="col-md-12">
+      <div class="col-md-12 text-center">
         <button class="btn btn-sm btn-warning" type="submit" [disabled]="!settingsForm.valid">
         	<i class="fa fa-pencil-alt"></i>&nbsp;
         Update Settings</button>

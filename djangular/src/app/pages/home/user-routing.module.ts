@@ -6,7 +6,6 @@ import {AuthGuard} from '../auth/auth-guard.service';
 import {ConnexionsManagementComponent} from './connexions-management/connexions-management.component';
 import { BlacklistComponent } from './blacklist/blacklist.component';
 import {HoneypotConnectionsComponent} from './honeypot-connections/honeypot-connections.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import {NetworkComponent} from './network/network.component';
 import {ActiveIpsComponent} from './active-ips/active-ips.component';
 import {ReportComponent} from './report/report.component';
@@ -40,10 +39,6 @@ const routes: Routes = [
         component: UserprofileComponent
       }
       ,
-      {
-        path: 'dashboard',
-        component: DashboardComponent
-      },
       {
         path: 'connexions-management',
         component: ConnexionsManagementComponent

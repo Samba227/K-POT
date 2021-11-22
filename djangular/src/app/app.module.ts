@@ -24,6 +24,7 @@ import {ConnexionsService} from './services/connexions.service';
 import {AdminModule} from './pages/admin/admin.module';
 import {FrameSortService} from './services/frame-sort.service';
 import {DashboardService} from './services/dashboard.service';
+import {SidebarModule} from 'primeng/sidebar';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import {DashboardService} from './services/dashboard.service';
     UserModule,
     AdminModule,
     PanelModule,
+    SidebarModule
   ],
   providers: [AuthService, TokenStorageService, AuthGuard, UserService, ConnexionsService, DashboardService, AdminAuthGuard, FrameSortService],
   exports: [

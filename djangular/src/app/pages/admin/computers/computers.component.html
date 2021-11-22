@@ -1,11 +1,17 @@
 <div class="container-fluid">
+  <div class="row mb-4">
+    <div class="col-xl-12 col-md-12">
+      <h1 class="h3 text-muted"><i class="fas fa-desktop"></i>&nbsp;&nbsp;Network Devices</h1>
+    </div>
+  </div>
+
   <div class="row">
     <div class="col-xl-7 col-lg-7">
       <div class="card mb-4">
         <!-- Card Header - Dropdown -->
         <div
-          class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-          <h4 class="m-0 text-primary">Computers list</h4>
+          class="card-header bg-info py-3 d-flex flex-row align-items-center justify-content-between">
+          <h4 class="m-0 text-white">Devices list</h4>
           <i role="button" (click)="refreshList()" title="refresh list" class="pi {{refreshing? 'pi-spin' : ''}} pi-refresh mr-2" style="font-size: 1.5rem"></i>
         </div>
         <!-- Card Body -->
@@ -36,10 +42,10 @@
       </div>
     </div>
     <div class="col-xl-5 col-lg-5" *ngIf="edit">
-      <form [formGroup]="computerForm" (ngSubmit)="editComputer()" class="bg-white">
+      <form [formGroup]="computerForm" (ngSubmit)="editComputer()">
         <div class="card shadow-sm" style="width:350px">
-          <div class="card-header">
-            <h4 class="card-title text-primary">Edit computer</h4>
+          <div class="card-header bg-warning">
+            <h4 class="card-title text-white">Edit computer</h4>
           </div>
           <div class="card-body">
             <div class="col-md-12">

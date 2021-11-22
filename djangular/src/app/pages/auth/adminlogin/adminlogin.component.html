@@ -1,10 +1,10 @@
 <app-header></app-header>
-<div class="container-fluid bg-light">
+<div class="container-fluid bg-info">
   <div class="row d-flex justify-content-center text-center">
-    <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="bg-white">
-      <div class="card" style="width:350px">
-        <div class="card-header bg-info">
-          <h4 class="card-title"><i class="fas fa-user-cog"></i>Admin Login</h4>
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+      <div class="card shadow-lg" style="width:350px">
+        <div class="card-header bg-light">
+          <h4 class="card-title text-info"><i class="fas fa-user-cog"></i>&nbsp;&nbsp;Admin Login</h4>
         </div>
         <div class="card-body">
           <div class="col-md-12">

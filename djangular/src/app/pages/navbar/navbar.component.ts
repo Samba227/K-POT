@@ -10,6 +10,7 @@ import {UserProfile} from '../../models/userProfile.model';
 })
 export class NavbarComponent implements OnInit {
   currentUser: UserProfile = this.tokenStorageService.getUser();
+  visibleSidebar1;
   constructor(private authService: AuthService, private tokenStorageService: TokenStorageService) { }
 
   ngOnInit(): void {

@@ -18,41 +18,30 @@ export class NetworkComponent implements OnInit {
   basicData: any;
   filters: any[];
   dataConsumptionDate: any;
-  colors: any = /*[
-    'rgba(2,91,250,0.78)',
-    'rgba(27,213,213,0.89)',
-    '#44aff5',
-    '#8963b5',
-    '#93f99e',
-
-  ];
-  */
-  ['#8963b5',
-'#a02be2',
-'#93f99e',
-'#42cffe',
-'#2cc867',
-'#aca8d1',
-'#e69f97',
-'#373348',
-'#857386',
-'#f0fc0b',
-'#72c54a',
-'#a346a8',
-'#af3503',
-'#a2406a',
-'#2d645c',
-'#2f8ca3',
-'#009907',
-'#b27b3a',
-'#732b3a',
-'#657904',
-'#d49558',
-'#a25fec',
-'#e9d34e'];
+  colors: any = ['#8963b5',
+                  '#93f99e',
+                  '#42cffe',
+                  '#2cc867',
+                  '#aca8d1',
+                  '#e69f97',
+                  '#373348',
+                  '#857386',
+                  '#f0fc0b',
+                  '#72c54a',
+                  '#a346a8',
+                  '#af3503',
+                  '#a2406a',
+                  '#2d645c',
+                  '#2f8ca3',
+                  '#009907',
+                  '#b27b3a',
+                  '#732b3a',
+                  '#657904',
+                  '#d49558',
+                  '#a25fec',
+                  '#e9d34e'
+      ];
   options1: any;
-  options2: any;
-  options3: any;
   constructor(private dashboardService: DashboardService) { }
 
   ngOnInit(): void {
@@ -63,35 +52,7 @@ export class NetworkComponent implements OnInit {
       {name: 'This month', code: 'm'},
       {name: 'Today', code: 'd'},
     ];
-    this.options3 = {
-      responsive: true,
-      legend: {
-      //  position: 'left',
-        labels: {
-          usePointStyle: true,
-        },
-      },
-      animation: {
-        duration: 0
-      }
-    };
-    this.options2 = {
-      responsive: true,
-      legend: {
-        //  position: 'left',
-        labels: {
-          usePointStyle: true,
-        },
-        scales: {
-          yAxes: [{
-            display: true,
-            ticks: {
-              beginAtZero: true
-            }
-          }]
-        },
-      }
-    };
+
     this.options1 = {
       responsive: true,
       legend: {
@@ -100,10 +61,18 @@ export class NetworkComponent implements OnInit {
         }
       },
       scales: {
+        xAxes: [{
+          gridLines: {
+            color: 'rgba(0, 0, 0, 0)',
+          }
+        }],
         yAxes: [{
           display: true,
           ticks: {
             beginAtZero: true
+          },
+          gridLines: {
+            color: 'rgba(0, 0, 0, 0)',
           }
         }]
       },
@@ -142,7 +111,7 @@ export class NetworkComponent implements OnInit {
                     label: 'Total Bandwidth',
                     data: this.actualBandwidths,
                     borderWidth: 0.5,
-                    fill: true,
+                    fill: false,
                     backgroundColor: "rgba(239,173,73,0.75)",
                     borderColor: "rgba(54,162,235,0.7)",
                     hoverBorderColor: "#f87502",
@@ -189,7 +158,7 @@ export class NetworkComponent implements OnInit {
                   {
                     label: result.ips[i],
                     data: actualDetails[i],
-                    fill: true,
+                    fill: false,
                     borderColor: this.colors[i],
                     backgroundColor: this.colors[i],
                     tension: .4
@@ -236,13 +205,7 @@ export class NetworkComponent implements OnInit {
               {
                 label: 'Data (' + this.default + ')',
                 data: values,
-                backgroundColor: this.colors/*[
-                  'rgba(248,74,111,0.82)',
-                  'rgba(226,62,100,0.8)',
-                  'rgba(238,133,155,0.81)',
-                  'rgba(234,171,184,0.84)',
-                  '#f6e2e6',
-                ]*/,
+                backgroundColor: this.colors,
                 hoverBackgroundColor: '#ea0e3a',
                 hoverBorderColor: '#ea0e3a',
                 hoverBorderWidth: 4,

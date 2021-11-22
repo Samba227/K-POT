@@ -27,10 +27,12 @@ import { FrameDetailComponent } from './connexions-management/frame-detail/frame
 import { BlacklistComponent } from './blacklist/blacklist.component';
 import { HoneypotConnectionsComponent } from './honeypot-connections/honeypot-connections.component';
 import { ConnectionProfileComponent } from './honeypot-connections/connection-profile/connection-profile.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { ReportComponent } from './report/report.component';
 import {RippleModule} from 'primeng/ripple';
-import {TooltipModule} from "primeng/tooltip";
+import {TooltipModule} from 'primeng/tooltip';
+import { ReportDetailsComponent } from './report/report-details/report-details.component';
+import {SidebarModule} from 'primeng/sidebar';
+
 
 @NgModule({
   declarations: [
@@ -46,8 +48,8 @@ import {TooltipModule} from "primeng/tooltip";
     BlacklistComponent,
     HoneypotConnectionsComponent,
     ConnectionProfileComponent,
-    DashboardComponent,
     ReportComponent,
+    ReportDetailsComponent,
   ],
     imports: [
         CommonModule,
@@ -68,7 +70,8 @@ import {TooltipModule} from "primeng/tooltip";
         AvatarGroupModule,
         TableModule,
         RippleModule,
-        TooltipModule
+        TooltipModule,
+        SidebarModule
     ],
   exports: [
     SidebarComponent,

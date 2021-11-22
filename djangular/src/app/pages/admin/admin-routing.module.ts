@@ -16,7 +16,7 @@ const routes: Routes = [
 
       {
         path: '',
-        redirectTo: 'offline-connexions',
+        redirectTo: 'users',
         pathMatch: 'full'
       },
       {

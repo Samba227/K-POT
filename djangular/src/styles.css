@@ -2,6 +2,34 @@
 body, html{
   height: 100%;
 }
+.container-fluid{
+  height: 100%;
+}
+
+#sidebar{
+  background-color: #17a2b8;
+  height: 100%;
+  position: fixed;
+  max-width: 12rem;
+  line-height: 3rem;
+  left: 0;
+  padding-top: 65px;
+}
+
+#main{
+  position: relative;
+  left: 10rem;
+  top: 100px;
+}
+a.list-group-item.list-group-item-action {
+  color: #eeeeee;
+  background-color: #17a2b8;
+}
+
+a.list-group-item.list-group-item-action:hover, a.list-group-item.list-group-item-action.active {
+  color: #eeeeee;
+  background-color: #2bb5cb;
+}
 
 .error{
   color:#5a5c69;
@@ -24,6 +52,10 @@ body, html{
   animation:noise-anim 2s infinite linear alternate-reverse;
 }
 
+.nav-link:hover, .nav-link:active{
+  color: #ff253a;
+}
+
 .error:before{
   content:attr(data-text);
   position:absolute;
@@ -35,4 +67,87 @@ body, html{
   overflow:hidden;
   clip:rect(0,900px,0,0);
   animation:noise-anim-2 3s infinite linear alternate-reverse
+}
+.border-left-primary {
+  border-left: 0.3rem solid #4e73df !important;
+}
+
+.border-bottom-primary {
+  border-bottom: 0.3rem solid #4e73df !important;
+}
+
+.border-right-primary {
+  border-right: 0.3rem solid #4e73df !important;
+}
+
+.border-left-secondary {
+  border-left: 0.3rem solid #858796 !important;
+}
+
+.border-right-secondary {
+  border-right: 0.3rem solid #858796 !important;
+}
+
+.border-bottom-secondary {
+  border-bottom: 0.3rem solid #858796 !important;
+}
+
+.border-left-success {
+  border-left: 0.3rem solid #1cc88a !important;
+}
+
+.border-right-success {
+  border-right: 0.3rem solid #1cc88a !important;
+}
+
+.border-bottom-success {
+  border-bottom: 0.3rem solid #1cc88a !important;
+}
+
+.border-left-info {
+  border-left: 0.3rem solid #36b9cc !important;
+}
+
+.border-right-info {
+  border-right: 0.3rem solid #36b9cc !important;
+}
+
+.border-bottom-info {
+  border-bottom: 0.3rem solid #36b9cc !important;
+}
+
+.border-left-warning {
+  border-left: 0.3rem solid #f6c23e !important;
+}
+
+.border-bottom-warning {
+  border-bottom: 0.3rem solid #f6c23e !important;
+}
+
+.border-left-danger {
+  border-left: 0.3rem solid #e74a3b !important;
+}
+
+.border-right-danger {
+  border-right: 0.3rem solid #e74a3b !important;
+}
+
+.border-bottom-danger {
+  border-bottom: 0.3rem solid #e74a3b !important;
+}
+
+.border-left-light {
+  border-left: 0.3rem solid #f8f9fc !important;
+}
+
+.border-bottom-light {
+  border-bottom: 0.3rem solid #f8f9fc !important;
+}
+
+.border-left-dark {
+  border-left: 0.3rem solid #5a5c69 !important;
+}
+
+.border-bottom-dark {
+  border-bottom: 0.3rem solid #5a5c69 !important;
 }

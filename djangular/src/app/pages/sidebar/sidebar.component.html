@@ -1,70 +1,48 @@
-<!-- Sidebar -->
-<ul class="navbar-nav text-danger" *ngIf="user?.is_superuser!==true; else superuser">
-  <li class="nav-item active">
-    <a class="nav-link" routerLink="/network">
-      <i class="fas fa-fw fa-tachometer-alt"></i>&nbsp;
-      <span>Dashboard</span></a>
-  </li>
-  <hr>
-  <li class="nav-item active">
-    <a class="nav-link" routerLink="/report">
-      <i class="fas fa-fw fa-download"></i>&nbsp;
-      <span>Report</span></a>
-  </li>
-  <hr>
-  <li class="nav-item active">
-    <a class="nav-link text-success" routerLink="/activeIPs">
-      <i class="fas fa-fw fa-exchange-alt"></i>&nbsp;
-      <span>Active IPs</span></a>
-  </li>
-<hr>
-
-<li class="nav-item active">
-  <a class="nav-link" routerLink="/connexions-management">
-    <i class="fas fa-fw fa-exchange-alt"></i>&nbsp;
-    <span>Connexions</span></a>
-</li>
-<hr>
-<li class="nav-item active">
-  <a class="nav-link" routerLink="/blacklist">
+<div class="list-group" id="sidebar" *ngIf="user?.is_superuser!==true; else superuser">
+  <a  class="list-group-item list-group-item-action" routerLinkActive="active" routerLink="/network">
+    <i class="fas fa-fw fa-chart-bar"></i>
+    <span class="p-ml-4">Dashboard</span>
+  </a>
+  <a  class="list-group-item list-group-item-action" routerLinkActive="active" routerLink="/report">
+    <i class="fas fa-fw fa-download"></i>
+    <span class="p-ml-4">Report</span>
+  </a>
+  <a  class="list-group-item list-group-item-action" routerLinkActive="active" routerLink="/activeIPs">
+    <i class="fas fa-fw fa-desktop"></i>
+    <span class="p-ml-4">Active Devices</span>
+  </a>
+  <a  class="list-group-item list-group-item-action" routerLinkActive="active" routerLink="/connexions-management">
+    <i class="fas fa-fw fa-exchange-alt"></i>
+    <span class="p-ml-4">Connexions</span>
+  </a>
+  <a  class="list-group-item list-group-item-action" routerLinkActive="active" routerLink="/blacklist">
     <i class="fas fa-exclamation-circle fa-sm"></i>
-    &nbsp;
-    <span>Blacklist</span></a>
-</li>
-<hr>
-<li class="nav-item active ">
-  <a class="nav-link text-danger" routerLink="/honeypot-connections">
-    <i class="fas fa-fw fa-exchange-alt"></i>&nbsp;
-    <span>Honeypot</span></a>
-</li>
-</ul>
+
+    <span class="p-ml-4">Blacklist</span>
+  </a>
+  <a  class="list-group-item list-group-item-action" routerLinkActive="active" routerLink="/honeypot-connections">
+    <i class="fas fa-fw fa-exchange-alt"></i>
+    <span class="p-ml-4">Honeypot</span>
+  </a>
+</div>
 
 <ng-template #superuser>
-  <ul class="navbar-nav text-danger">
-    <li class="nav-item active">
-      <a class="nav-link" routerLink="/admin/offline-connexions">
-      <i class="fas fa-fw fa-exchange-alt"></i>&nbsp;
-      <span>Connexions</span></a>
-    </li>
-    <hr>
-    <li class="nav-item active">
-      <a class="nav-link" routerLink="/admin/users">
-      <i class="fas fa-fw fa-users"></i>&nbsp;
-      <span>Users</span></a>
-    </li>
-    <hr>
-    <li class="nav-item active">
-      <a class="nav-link" routerLink="/admin/capture-settings">
-      <i class="fas fa-fw fa-cogs"></i>&nbsp;
-      <span>Capture</span></a>
-    </li>
-    <hr>
-    <li class="nav-item active">
-      <a class="nav-link" routerLink="/admin/computers">
-        <i class="fas fa-fw fa-laptop"></i>&nbsp;
-        <span>Computers</span></a>
-    </li>
-  </ul>
+  <div class="list-group" id="sidebar">
+    <a  class="list-group-item list-group-item-action" routerLinkActive="active" routerLink="/admin/offline-connexions">
+      <i class="fas fa-fw fa-exchange-alt"></i>
+      <span class="p-ml-4">Connexions</span>
+    </a>
+    <a  class="list-group-item list-group-item-action" routerLinkActive="active" routerLink="/admin/users">
+      <i class="fas fa-fw fa-users"></i>
+      <span class="p-ml-4">Users</span>
+    </a>
+    <a  class="list-group-item list-group-item-action" routerLinkActive="active" routerLink="/admin/capture-settings">
+      <i class="fas fa-fw fa-cogs"></i>
+      <span class="p-ml-4">Capture</span>
+    </a>
+    <a  class="list-group-item list-group-item-action" routerLinkActive="active" routerLink="/admin/computers">
+      <i class="fas fa-fw fa-laptop"></i>
+      <span class="p-ml-4">Devices</span>
+    </a>
+  </div>
 </ng-template>
-
-

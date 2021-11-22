@@ -1,19 +1,20 @@
+<!--
 <div class="container">
-  <!-- Page Heading -->
-  <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Honeypot Connections</h1>
-
+  <div class="row mb-2">
+    <div class="col-xl-12 col-md-12 text-center">
+      <h1 class="h4 text-danger">Honeypot Connections</h1>
+    </div>
   </div>
 
   <div class="row">
     <div class="col-md-12">
       <div class="card shadow-sm mb-4">
-        <div class="card-header d-sm-flex align-items-center justify-content-between mb-0" >
+        <div class="card-header bg-info border-bottom-danger d-sm-flex align-items-center justify-content-between mb-0" >
           <div class="col-md-6">
-            <span class="m-0 p-text-capitalize">
+            <span class="m-0 font-weight-bold text-white p-text-capitalize">
               List of Connections :&nbsp;
             </span>
-            <p-dropdown [options]="connections"
+            <p-dropdown class="p-ml-3" [options]="connections"
                         [(ngModel)]="selectedIp" [virtualScroll]="true"
                         itemSize="30" optionLabel="name" optionValue="value"
                         placeholder="Select an IP address" (onChange)="loadProfile()"
@@ -27,3 +28,20 @@
  <app-connection-profile *ngIf="selectedProfile" [selectedProfile]="selectedProfile"></app-connection-profile>
 
 </div>
+-->
+
+<div class="container">
+  <!-- Page Heading -->
+  <div class="row mb-2">
+    <div class="col-xl-12 col-md-12 text-center">
+      <h1 class="h3 text-muted">Honeypot Connections</h1>
+    </div>
+  </div>
+  <div class="{{selectedProfile ? 'mb-4': 'text-center'}}">
+    <p-dropdown [options]="connections" [(ngModel)]="selectedIp" placeholder="Select an IP address" optionLabel="name" optionValue="value" (onChange)="loadProfile()"></p-dropdown>
+  </div>
+  <app-connection-profile *ngIf="selectedProfile" [selectedProfile]="selectedProfile"></app-connection-profile>
+</div>
+
+
+
