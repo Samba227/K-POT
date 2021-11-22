@@ -329,7 +329,7 @@
         pButton type="button"
         label="{{selectedConnexion?.ipSource}}[{{selectedConnexion?.macSource}}]"
         class="p-button-danger"
-        (click)="addBlacklist(selectedConnexion?.macSource)">
+        (click)="addBlacklist(selectedConnexion?.ipSource)">
 
         </button>
 
@@ -339,7 +339,7 @@
         pButton type="button"
         label="{{selectedConnexion?.ipDest}}[{{selectedConnexion?.macDest}}]"
         class="p-button-secondary"
-        (click)="addBlacklist(selectedConnexion?.macDest)">
+        (click)="addBlacklist(selectedConnexion?.ipDest)">
 
         </button>
     </div>
