@@ -3,8 +3,6 @@ from datetime import datetime, timedelta
 
 
 def getIPConsumption(ip, date=None):
-    total_sent = 0
-    total_recieved = 0
     if date is None:
         frames_sent = Frame.objects.filter(ip_src=ip, is_online=True).values('frame_len')
         frames_recieved = Frame.objects.filter(ip_dst=ip, is_online=True).values('frame_len')
@@ -33,10 +31,9 @@ def getTotalConsumption(ips, date=None):
     return result
 
 
-#date in 's,d,m,y' , by default = total consumption
+# date in 's,d,m,y' , by default = total consumption
 def getIPConsumptionByDate(ip, date=None):
     d = datetime.now() - timedelta(seconds=1)
-    start = None
     if date is None or date not in 'sdmy':
         start = d.strftime('%Y')
     else:
@@ -54,10 +51,8 @@ def getIPConsumptionByDate(ip, date=None):
 
 
 def getAllIPConsumption(date=None):
-    result = []
-    # get only intern machines
-    ips1 = Frame.objects.filter(ip_src__startswith='192.168.2.', is_online=True).order_by('ip_src').distinct('ip_src').values('ip_src')
-    ips = [i['ip_src'] for i in ips1]
+    local_machines = LocalMachine.objects.order_by('ip').values('ip', 'name')
+    ips = [i['ip'] for i in local_machines]
     
     if date is None or date not in 'dmy':
         date = None
