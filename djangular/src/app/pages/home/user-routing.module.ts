@@ -3,12 +3,10 @@ import { Routes, RouterModule, Router } from '@angular/router';
 import {HomeComponent} from './home.component';
 import {UserprofileComponent} from './userprofile/userprofile.component';
 import {AuthGuard} from '../auth/auth-guard.service';
-import {ConnexionsManagementComponent} from './connexions-management/connexions-management.component';
 import { BlacklistComponent } from './blacklist/blacklist.component';
 import {HoneypotConnectionsComponent} from './honeypot-connections/honeypot-connections.component';
-import {NetworkComponent} from './network/network.component';
-import {ActiveIpsComponent} from './active-ips/active-ips.component';
 import {ReportComponent} from './report/report.component';
+import {DashboardComponent} from './dashboard/dashboard.component';
 
 const routes: Routes = [
   {
@@ -19,30 +17,22 @@ const routes: Routes = [
 
       {
         path: '',
-        redirectTo: 'activeIPs',
+        redirectTo: 'home',
         pathMatch: 'full'
       },
       {
-        path: 'network',
-        component: NetworkComponent
+        path: 'home',
+        component: DashboardComponent
       },
       {
         path: 'report',
         component: ReportComponent
       },
       {
-        path: 'activeIPs',
-        component: ActiveIpsComponent
-      },
-      {
         path: 'profile',
         component: UserprofileComponent
       }
       ,
-      {
-        path: 'connexions-management',
-        component: ConnexionsManagementComponent
-      },
       {
         path: 'blacklist',
         component: BlacklistComponent

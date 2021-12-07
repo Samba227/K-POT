@@ -10,7 +10,7 @@ import {ConnexionsService} from '../../../services/connexions.service';
 })
 export class BlacklistComponent implements OnInit {
 
-  list : BlacklistIP[] = [];
+  list: BlacklistIP[] = [];
 
   constructor(
     private connexionsService: ConnexionsService,

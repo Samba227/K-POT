@@ -6,8 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ConnexionsService {
-  readonly ApiUrl = 'http://192.168.2.1:8081/api/connexions';
-  readonly ApiUrl2 = 'http://192.168.2.1:8081/';
+  readonly ApiUrl = 'http://127.0.0.1:8000/api/connexions';
+  readonly ApiUrl2 = 'http://127.0.0.1:8000/';
 
   constructor(private http: HttpClient) { }
 

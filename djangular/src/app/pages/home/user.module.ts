@@ -19,19 +19,15 @@ import {DropdownModule} from 'primeng/dropdown';
 import {PanelModule} from 'primeng/panel';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {TableModule} from 'primeng/table';
-import { NetworkComponent } from './network/network.component';
-import { ActiveIpsComponent } from './active-ips/active-ips.component';
-import { ActiveIpsDetailsComponent } from './active-ips/active-ips-details/active-ips-details.component';
-import { ConnexionsManagementComponent } from './connexions-management/connexions-management.component';
-import { FrameDetailComponent } from './connexions-management/frame-detail/frame-detail.component';
 import { BlacklistComponent } from './blacklist/blacklist.component';
 import { HoneypotConnectionsComponent } from './honeypot-connections/honeypot-connections.component';
-import { ConnectionProfileComponent } from './honeypot-connections/connection-profile/connection-profile.component';
 import { ReportComponent } from './report/report.component';
 import {RippleModule} from 'primeng/ripple';
 import {TooltipModule} from 'primeng/tooltip';
 import { ReportDetailsComponent } from './report/report-details/report-details.component';
 import {SidebarModule} from 'primeng/sidebar';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { DeviceConsumptionComponent } from './dashboard/device-consumption/device-consumption.component';
 
 
 @NgModule({
@@ -40,16 +36,12 @@ import {SidebarModule} from 'primeng/sidebar';
     UserprofileComponent,
     SidebarComponent,
     NavbarComponent,
-    NetworkComponent,
-    ActiveIpsComponent,
-    ActiveIpsDetailsComponent,
-    ConnexionsManagementComponent,
-    FrameDetailComponent,
     BlacklistComponent,
     HoneypotConnectionsComponent,
-    ConnectionProfileComponent,
     ReportComponent,
     ReportDetailsComponent,
+    DashboardComponent,
+    DeviceConsumptionComponent,
   ],
     imports: [
         CommonModule,

@@ -1,0 +1,127 @@
+<div class="container-fluid">
+  <!-- Page Heading -->
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 p-text-capitalize text-muted">Dashboard</h1>
+  </div>
+
+  <!-- Content Row -->
+  <div class="row">
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card border-left-dark shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-sm font-weight-bold text-dark text-uppercase mb-1">
+                Total Data</div>
+              <div class="h5 mb-0 font-weight-bold text-muted text-gray-400">
+                {{totalData >= 1000000 ?(totalData/1000000).toFixed(2) + ' Go' : totalData >= 1000 ? (totalData/1000).toFixed(2) + ' Mo' : totalData + ' Ko'}}
+              </div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fa-exchange-alt fa-2x text-muted text-gray-300"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card border-left-info shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-sm font-weight-bold text-info text-uppercase mb-1">
+                Total Devices</div>
+              <div class="h5 mb-0 font-weight-bold text-muted text-gray-400">
+                {{ devices ? devices.length : 0}}
+              </div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fa-desktop fa-2x text-info text-gray-300"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card border-left-success shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-sm font-weight-bold text-success text-uppercase mb-1">
+                Active Devices</div>
+              <div class="h5 mb-0 font-weight-bold text-muted text-gray-400">
+                {{ activeIps ? activeIps.length : 0}}
+              </div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fa-circle text-success text-gray-300"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-md-12 col-lg-12 col-xl-12">
+      <div class="card shadow mb-4">
+        <div class="card-header py-3 bg-info">
+          <h6 class="m-0 font-weight-bold text-white">Network Devices</h6>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead class="text-center bg-light">
+              <tr>
+                <th></th>
+                <th>IP Address</th>
+                <th>Name</th>
+              </tr>
+              </thead>
+              <tbody class="text-center">
+                <tr
+                  *ngFor="let device of devices"
+                  role="button"
+                  (click)="onSelectDevice(device)"
+                  [ngClass]="{'bg-info' : device === selectedDevice}"
+
+                >
+                  <td><i class="{{ device.isActive ? 'pi pi-circle-on text-success' : 'pi pi-circle-off'}}"></i></td> <!-- is active-->
+                  <td>
+                    {{ device.ip}}
+                  </td>
+                  <td>
+                    {{device.name}}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="row">
+
+  </div>
+  <p-dialog
+    [(visible)]="showDetails"
+    [draggable]="false"
+    [resizable]="false"
+    header="Device Consumption Details"
+    *ngIf="selectedDevice"
+    [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}"
+    (onHide)="closeClick()">
+    <div class="card">
+      <div class="card-body">
+          <app-device-consumption [device]="selectedDevice" [chartValues]="chartValues"></app-device-consumption>
+
+      </div>
+    </div>
+  </p-dialog>
+</div>

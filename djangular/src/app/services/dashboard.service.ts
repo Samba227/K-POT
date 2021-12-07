@@ -6,26 +6,22 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class DashboardService {
-  readonly ApiUrl = 'http://192.168.2.1:8081/api/dashboard/';
+  readonly ApiUrl = 'http://127.0.0.1:8000/api/dashboard/';
   constructor(private http: HttpClient) { }
 
-  getData(): Observable<any[]>{
-    return this.http.get<any[]>(this.ApiUrl);
-  }
-  getBandwidth(): Observable<any[]>{
-    return this.http.get<any[]>(this.ApiUrl + 'bandwidth/');
+  getTotalConsumption(date: any): Observable<any[]>{
+    return this.http.get<any[]>(this.ApiUrl + 'total-consumption/d=' + date + '/');
   }
 
-  getConsumptionByDate(date: any): Observable<any[]>{
-    return this.http.get<any[]>(this.ApiUrl + 'data/d=' + date + '/');
+  getAllDevices(): Observable<any[]>{
+    return this.http.get<any[]>(this.ApiUrl + 'local-devices/filter=all/');
   }
 
-  getActiveIPs(): Observable<any[]>{
-    return this.http.get<any[]>(this.ApiUrl + 'activeIPs/');
+  getActiveDevices(): Observable<any[]>{
+    return this.http.get<any[]>(this.ApiUrl + 'local-devices/filter=active/');
   }
 
-  getActiveIPConsumption(ip: any): Observable<any[]>{
-    return this.http.get<any[]>(this.ApiUrl + 'activeIPs/' + ip + '/d=s/');
+  getDeviceConsumption(ip: any, date: any): Observable<any[]>{
+    return this.http.get<any[]>(this.ApiUrl + 'device-consumption/' + ip + '/d=' + date + '/');
   }
 }
-
