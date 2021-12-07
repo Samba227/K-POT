@@ -15,3 +15,16 @@ def search_similar(mat1, list_of_mat):
         liste.append(euclidian_distance(mat1, list_of_mat[i]))
 
     return liste.index(min(liste)), min(liste)
+
+# this function determine if a connexion is suspisous or not
+def is_suspicious(mat1, list_of_mat):
+    liste = []
+    for i in range(len(list_of_mat)):
+        liste.append(euclidian_distance(mat1, list_of_mat[i]))
+
+    m = min(liste)
+    s = sum(liste)
+    if 1/len(liste) > m/s:
+        return m, True
+    else:
+        return m, False

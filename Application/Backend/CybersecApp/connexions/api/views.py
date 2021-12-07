@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from .serializers import FrameSerializer, HMMLabelSerializer, FrameCaptureConfSerializer,SuspiciousIpSerializer, LocalMachineSerializer
 from ..models import Frame, HMMLearning, HMMOnline, FrameCaptureConf, SuspiciousIp, LocalMachine
 from ..tools.HMMConversion import HMMConversion
-from ..tools.HMMCheck import search_hmm_label
+from ..tools.HMMCheck import search_hmm_label, check_supspicious
 
 
 class OfflineConnexionsView(APIView):
@@ -94,9 +94,27 @@ class OnlineHMMCheckView(APIView):
         conn = request.data.get('connexion')
         context = {}
         if conn is not None :
-            hmm = HMMOnline.objects.filter(connexion=conn).first()
+            hmm = HMMOnline.objects.filter(connexion=conn).last()
             if hmm is not None:
                 label, distance = search_hmm_label(hmm)
+                context['success'] = True
+                context['label'] = label
+                context['distance'] = distance
+            else:
+                context['failure'] = True
+        else:
+            context['fieldsError'] = True
+        return Response(context)
+
+
+class OnlineHMMCheckSuspisious(APIView):
+    def post(self, request):
+        conn = request.data.get('connexion')
+        context = {}
+        if conn is not None :
+            hmm = HMMOnline.objects.filter(connexion=conn).last()
+            if hmm is not None:
+                distance, label = check_supspicious(hmm)
                 context['success'] = True
                 context['label'] = label
                 context['distance'] = distance
