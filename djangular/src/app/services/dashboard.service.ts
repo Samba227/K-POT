@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class DashboardService {
-  readonly ApiUrl = 'http://127.0.0.1:8000/api/dashboard/';
+  readonly ApiUrl = 'http://192.168.2.1:8081/api/dashboard/';
   constructor(private http: HttpClient) { }
 
   getTotalConsumption(date: any): Observable<any[]>{
