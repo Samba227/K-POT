@@ -160,7 +160,7 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-DATABASE_ROUTERS = ['routers.db_routers.AuthRouter', 'routers.db_routers.ConnexionsRouter', 'routers.db_routers.HoneypotRouter',]
+DATABASE_ROUTERS = ['routers.db_routers.AuthRouter', 'routers.db_routers.ConnexionsRouter', 'routers.db_routers.HoneypotRouter', 'routers.db_routers.ReportRouter']
 
 AUTH_USER_MODEL = 'users.User'
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
