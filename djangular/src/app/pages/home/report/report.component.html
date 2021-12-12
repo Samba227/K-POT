@@ -7,7 +7,7 @@
     </div>
   </div>
   <div class="{{report ? '': 'text-center'}}">
-    <p-dropdown [options]="filters" [(ngModel)]="reportDate" placeholder="Select a filter" optionLabel="name" (onChange)="loadReport()" [showClear]="true"></p-dropdown>
+    <p-dropdown [options]="dates" [(ngModel)]="reportDate" placeholder="Select a date" (onChange)="loadReport()" [showClear]="true"></p-dropdown>
   </div>
 </div>
 

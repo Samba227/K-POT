@@ -15,25 +15,29 @@ export class ReportComponent implements OnInit {
 
   report: Report;
 
-  filters: any[];
+  dates: any[];
   reportDate: any;
 
   constructor(private service: ConnexionsService) { }
 
   ngOnInit(): void {
-    this.filters  = [
-      {name: 'Today', code: 'd'},
-      {name: 'Last 7 days', code: 'w'},
-      {name: 'Last 30 days', code: 'm'},
-    ];
+    this.service.getAllReportsDates().subscribe(
+      (result: any) => {
+        if (result.dates !== undefined){
+          this.dates = result.dates;
+        }
+      }
+    );
   }
 
   loadReport(){
     this.report = undefined;
     if (this.reportDate !== null){
-      this.service.getGlobalReport(this.reportDate.code).subscribe(
+      this.service.getReport(this.reportDate).subscribe(
         (result: any) => {
-          this.report = result;
+          if (result.report !== undefined){
+            this.report = result.report;
+          }
         }
       );
     }

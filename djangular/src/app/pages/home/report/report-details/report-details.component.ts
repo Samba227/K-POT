@@ -9,30 +9,12 @@ import autoTable from 'jspdf-autotable';
   styleUrls: ['./report-details.component.css']
 })
 export class ReportDetailsComponent implements OnInit {
-  cols1: any[];
-  cols2: any[];
-
   @Input() report: any;
   @Input() date: any;
 
-  exportColumns1: any[];
-  exportColumns2: any[];
-
-  constructor(private service: ConnexionsService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.cols1 = [
-      { field: 'ip', header: 'IP' },
-      { field: 'name', header: 'Name' },
-      { field: 'count', header: 'Count (Ko)' },
-    ];
-    this.cols2 = [
-      { field: 'ip', header: 'IP' },
-      { field: 'name', header: 'Name' },
-      { field: 'total', header: 'Total (Ko)' },
-    ];
-    this.exportColumns1 = this.cols1.map(col => ({title: col.header, dataKey: col.field}));
-    this.exportColumns2 = this.cols2.map(col => ({title: col.header, dataKey: col.field}));
   }
 
   exportPdf() {
@@ -54,33 +36,25 @@ export class ReportDetailsComponent implements OnInit {
     doc.line(0, 80, 1200, 80);
     doc.text('Report Period', 40, 120);
     doc.text('Total Data Consumed', 240, 120);
-    doc.text('Total User Connected', 450, 120);
 
     doc.setFontSize(10);
     doc.text(this.date.name, 40, 140);
     doc.text(this.report.total_data >= 1000000 ? (this.report.total_data / 1000000).toFixed(2) + ' Go' : this.report.total_data >= 1000 ? (this.report.total_data / 1000).toFixed(2) + ' Mo' : this.report.total_data + ' Ko', 280, 140);
-    doc.text('' + this.report.data_by_ip.length, 500, 140);
 
     doc.setFontSize(12);
-    autoTable(doc, {
-      columns: this.exportColumns1,
-      body: this.report.top_dest,
-      startY:  200,
-      didDrawPage: (dataArg) => {
-        doc.text('Top destinations', dataArg.settings.margin.left, 190);
-      }
-    });
-    let finalY = (doc as any).lastAutoTable.finalY; // The y position on the page
-    autoTable(doc, {
-      columns: this.exportColumns2,
-      body: this.report.data_by_ip,
-      startY: finalY + 70,
-      didDrawPage: (dataArg) => {
-        doc.text('Data consumption by device', dataArg.settings.margin.left, finalY + 50);
-      }
-    });
 
-    finalY = (doc as any).lastAutoTable.finalY;
+    doc.text('Data consumption by device', 40, 190);
+    (doc as any).autoTable(
+      { html: '#dataByDevices',
+        startY: 200,
+        styles: {
+          overflow: 'linebreak',
+          valign: 'middle'
+        }
+      });
+
+    let finalY = (doc as any).lastAutoTable.finalY; // The y position on the page
+    /*
     // -- html table
     doc.text('Connections by date', 40, finalY + 70);
     (doc as any).autoTable(
@@ -90,7 +64,7 @@ export class ReportDetailsComponent implements OnInit {
         overflow: 'linebreak',
         valign: 'middle'
       }
-      });
+      });*/
     doc.save('globalReport.pdf');
   }
 
