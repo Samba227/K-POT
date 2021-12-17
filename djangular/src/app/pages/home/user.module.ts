@@ -28,6 +28,7 @@ import { ReportDetailsComponent } from './report/report-details/report-details.c
 import {SidebarModule} from 'primeng/sidebar';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DeviceConsumptionComponent } from './dashboard/device-consumption/device-consumption.component';
+import {ConnectionProfileComponent} from './honeypot-connections/connection-profile/connection-profile.component';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { DeviceConsumptionComponent } from './dashboard/device-consumption/devic
     ReportDetailsComponent,
     DashboardComponent,
     DeviceConsumptionComponent,
+    ConnectionProfileComponent
   ],
     imports: [
         CommonModule,
