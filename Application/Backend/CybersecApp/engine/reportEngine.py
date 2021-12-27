@@ -60,66 +60,11 @@ def getGlobalReport(date):
                                  frames.order_by('ip_dst').distinct('ip_dst').values('ip_dst')],
             })
 
-    # -- Render HTML Tags ------
-    data_by_ip_html = '\
-                      <table class="table table-bordered" id="dataByDevices" width="100%" cellspacing="0">\
-                        <thead class="text-center bg-light">\
-                            <tr>\
-                                <th>IP Address</th>\
-                                <th>Name</th>\
-                                <th>Total (Mo)</th>\
-                            </tr>\
-                        </thead>\
-                        <tbody class="text-center">'
-
-    for item in data_by_ip:
-        data_by_ip_html += '<tr>\
-                                <td>{}</td>\
-                                <td>{}</td>\
-                                <td>{}</td>\
-                            </tr>'.format(item['ip'], item['name'], item['total'])
-
-    data_by_ip_html += '</tbody></table>'
-
-    connections_by_device_html = '\
-        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">\
-            <thead class="text-center bg-light"> \
-                <tr>\
-                    <th>IP Address</th>\
-                    <th>Name</th>\
-                    <th>First Con.</th>\
-                    <th>Last Con.</th>\
-                    <th>Destinations</th>\
-                </tr>\
-            </thead>\
-            <tbody class="text-center">'
-
-    for item in connections_by_device:
-        connections_by_device_html += '\
-            <tr>\
-                <td>{}</td>\
-                <td>{}</td>\
-                <td>{}</td>\
-                <td>{}</td>\
-                <td class="text-justify">\
-                    {}\
-                </td>\
-            </tr>'\
-        .format(
-            item['ip'],
-            item['name'],
-            item['first_con'][10:],
-            item['last_con'][10:],
-            ', '.join(item['destinations'])
-        )
-
-    connections_by_device_html += '</tbody></table>'
-
     return {
         'date': date,
         'total_data': total_data,
-        'data_by_device': data_by_ip_html,
-        'connections_by_device': connections_by_device_html
+        'data_by_device': data_by_ip,
+        'connections_by_device': connections_by_device
     }
 
 
