@@ -1,14 +1,14 @@
-<div class="container-fluid p-mt-6">
+<div class="container-fluid p-mt-6" id="haha" #haha>
   <!-- Page Heading -->
   <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 p-text-capitalize text-muted">Global Report</h1>
-    <button type="button" label="Generate Report" pButton pRipple icon="pi pi-file-pdf" (click)="exportPdf()" class="p-button-warning p-mr-2 shadow-sm" pTooltip="PDF" tooltipPosition="bottom"></button>
+    <button type="button" label="Generate Report" pButton pRipple icon="pi pi-file-pdf" (click)="saveHeaders()" class="p-button-warning p-mr-2 shadow-sm" pTooltip="PDF" tooltipPosition="bottom"></button>
 
   </div>
 
   <!-- Content Row -->
-  <div class="row">
-    <div class="col-xl-4 col-md-6 mb-4">
+  <div class="row d-sm-flex align-items-center justify-content-between">
+    <div class="col-xl-3 col-md-6 mb-4">
       <div class="card border-left-dark shadow h-100 py-2">
         <div class="card-body">
           <div class="row no-gutters align-items-center">
@@ -20,14 +20,14 @@
               </div>
             </div>
             <div class="col-auto">
-              <i class="fas fa-calendar-alt fa-2x text-muted text-gray-300"></i>
+              <i id="period" class="fas fa-calendar-alt fa-2x text-muted text-gray-300"></i>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="col-xl-4 col-md-6 mb-4">
+    <div class="col-xl-3 col-md-6 mb-4">
       <div class="card border-left-primary shadow h-100 py-2">
         <div class="card-body">
           <div class="row no-gutters align-items-center">
@@ -35,11 +35,28 @@
               <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                 Total Data Consumed</div>
               <div class="h5 mb-0 font-weight-bold text-gray-800">
-                {{report.total_data >= 1000 ?(report.total_data/1000).toFixed(2) + ' Go' : report.total_data + ' Mo'}}
+                {{report.total_data >= 1000 ?(report.total_data/1000).toFixed(2) + ' Go' :  report.total_data + ' Mo'}}
               </div>
             </div>
             <div class="col-auto">
-              <i class="fas fa-exchange-alt fa-2x text-gray-300"></i>
+              <i id="total_data" class="fas fa-exchange-alt fa-2x text-gray-300"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card border-left-success shadow h-100 py-2">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                Network Users</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">{{report.data_by_device.length}}</div>
+            </div>
+            <div class="col-auto">
+              <i id="connections" class="fas fa-desktop fa-2x text-gray-300"></i>
             </div>
           </div>
         </div>
@@ -50,30 +67,94 @@
 
   <!-- Content Row -->
 
-  <div class="row p-mt-4">
-    <div class="col-md-4 col-lg-3 col-xl-4">
+ <div class="row p-mt-4">
+    <div class="col-lg-12 col-xl-12">
       <div class="card shadow mb-4">
         <div class="card-header py-3 bg-info">
-          <h6 class="m-0 font-weight-bold text-white p-text-capitalize">Data By Device</h6>
+          <h6 class="m-0 font-weight-bold text-white"><i class="fas fa-fw fa-tachometer-alt mr-2"></i>Data By Device (Mo)</h6>
         </div>
         <div class="card-body">
-          <div class="table-responsive" [innerHTML]="report.data_by_device"></div>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-8 col-lg-9 col-xl-8">
-      <div class="card shadow mb-4">
-        <div class="card-header py-3 bg-info">
-          <h6 class="m-0 font-weight-bold text-white">Connections by Devices</h6>
-        </div>
-        <div class="card-body">
-          <div class="table-responsive" [innerHTML]="report.connections_by_device">
+          <div class="row p-mt-4">
+            <div class="col-lg-6 col-xl-6">
+              <p-table #dt1 [columns]="cols1" [value]="report.data_by_device" styleClass="p-datatable-sm" responsiveLayout="scroll">
+                <ng-template pTemplate="header" let-columns>
+                  <tr>
+                    <th *ngFor="let col of columns">
+                      {{col.header}}
+                    </th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-rowData let-columns="columns">
+                  <tr [pSelectableRow]="rowData">
+                    <td *ngFor="let col of columns">
+                      {{rowData[col.field]}}
+                    </td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </div>
+            <div class="col-lg-6 col-xl-6 bg-light">
+              <div class="chart-pie pt-4 pb-2" id="bar_chart" #bar_chart>
+                <p-chart type="bar" [data]="dataByDeviceChart" [options]="options1" width="90%" height="18rem"></p-chart>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-
     </div>
-
   </div>
-</div>
 
+  <div class="row p-mt-4">
+    <div class="col-lg-12 col-xl-12">
+      <div class="card shadow mb-4">
+        <div class="card-header py-3 bg-info">
+          <h6 class="m-0 font-weight-bold text-white"><i class="fas fa-fw fa-exchange-alt mr-2"></i>Connections By Device</h6>
+        </div>
+        <div class="card-body">
+          <div class="row p-mt-4">
+            <div class="col-lg-7 col-xl-7">
+              <div class="table-responsive"  style="height: 20rem" >
+                <table class="table table-bordered" id="dataTable" width="100%"cellspacing="0">
+                  <thead class="bg-light">
+                  <tr>
+                    <th>IP Address</th>
+                    <th>Name</th>
+                    <th>First Con.</th>
+                    <th>Last Con.</th>
+                    <th>Destinations</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let con of report.connections_by_device">
+                        <td style="vertical-align : middle;text-align:center;">
+                          {{con.ip}}
+                        </td>
+                        <td style="vertical-align : middle;text-align:center;">
+                          {{con.name}}
+                        </td>
+                        <td style="vertical-align : middle;text-align:center;">
+                          {{con.first_con}}
+                        </td>
+                        <td style="vertical-align : middle;text-align:center;">
+                          {{con.last_con}}
+                        </td>
+                        <td class="text-left">
+                        {{con.destinations}}
+                        </td>
+                      </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="col-lg-5 col-xl-5 bg-light">
+              <div class="chart-pie pt-4 pb-2" id="pie_chart" #pie_chart>
+                <p-chart type="doughnut" [data]="connectionsByDeviceChart" [options]="options2"  width="90%" height="18rem"></p-chart>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
